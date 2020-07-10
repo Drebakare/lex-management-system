@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -47,5 +48,16 @@ class User extends Authenticatable
 
     public function store(){
         return $this -> belongsTo(Store::class);
+    }
+
+    public static function createUser($request, $role_id = 1){
+        $create_user = new User();
+        $create_user->email = $request->email;
+        $create_user->password = bcrypt($request->password);
+        $create_user->password = bcrypt($request->password);
+        $create_user->role_id = $role_id;
+        $create_user->token = Str::random(15);
+        $create_user->save();
+        return $create_user;
     }
 }

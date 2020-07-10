@@ -3,13 +3,13 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="{{route('admin.dashboard')}}" class="logo logo-light">
+                <a href="{{--{{route('admin.dashboard')}}--}}" class="logo logo-light">
                         <span class="logo-sm">
                             {{--<img src="{{asset('_admin/assets/images/logo-light.svg')}}" alt="" height="22">--}}
-                            <h4 class="text-white mt-3">Lexy's Admin</h4>
+                            <h4 class="text-white mt-3">LEXICAN </h4>
                         </span>
                     <span class="logo-lg ">
-                        <h4 class="text-white mt-3">Lexy's Admin</h4>
+                        <h4 class="text-white mt-3">LEXICAN</h4>
                     </span>
                 </a>
             </div>

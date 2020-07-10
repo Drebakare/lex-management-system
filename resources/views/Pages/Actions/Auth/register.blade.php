@@ -16,6 +16,7 @@
         <link href="{{asset('_admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('_admin/assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     </head>
     <body>
     {{--<div class="home-btn d-none d-sm-block">
@@ -41,38 +42,35 @@
                         </div>
                         <div class="card-body pt-0">
                             <div>
-                                <a href="{{--index.html--}}">
+                                <div href="{{--index.html--}}">
                                     <div class="avatar-md profile-user-wid mb-4">
                                                 <span class="avatar-title rounded-circle bg-light">
                                                     <img src="{{asset('_admin/assets/images/logo.svg')}}" alt="" class="rounded-circle" height="34">
                                                 </span>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                             <div class="p-2">
-                                <form class="form-horizontal" action="#">
+                                <form class="form-horizontal" action="{{route('user.register')}}" method="post">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="useremail">Email</label>
-                                        <input type="email" class="form-control" id="useremail" placeholder="Enter email">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                        <input name="email" type="email" class="form-control" id="useremail" placeholder="Enter email" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="userpassword">Password</label>
-                                        <input type="password" class="form-control" id="userpassword" placeholder="Enter password">
+                                        <input name="password" type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="userpassword">Confirm Password</label>
+                                        <input name="password_confirmation" type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
                                     </div>
 
                                     <div class="mt-4">
                                         <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button>
                                     </div>
-
-                                    {{--<div class="mt-4 text-center">
-                                        <p class="mb-0">By registering you agree to the Skote <a href="#" class="text-primary">Terms of Use</a></p>
-                                    </div>--}}
                                 </form>
                             </div>
 
@@ -94,9 +92,22 @@
     <script src="{{asset('_admin/assets/libs/metismenu/metisMenu.min.js')}}"></script>
     <script src="{{asset('_admin/assets/libs/simplebar/simplebar.min.js')}}"></script>
     <script src="{{asset('_admin/assets/libs/node-waves/waves.min.js')}}"></script>
-
     <!-- App js -->
     <script src="{{asset('_admin/assets/js/app.js')}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        @if(session('failure'))
+        toastr.error('{{session("failure")}}');
+        @endif
+        @if(count($errors)>0)
+        @foreach($errors->all() as $error)
+        toastr.error('{{$error}}');
+        @endforeach
+        @endif
+        @if(session('success'))
+        toastr.success('{{session("success")}}');
+        @endif
+    </script>
     </body>
 
 </html>

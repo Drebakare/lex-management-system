@@ -4,10 +4,14 @@ namespace App\Http\Controllers\API;
 
 use App\HomeTown;
 use App\Http\Controllers\Controller;
+use App\Imports\DepartmentImport;
+use App\Imports\DesignationImport;
+use App\Imports\TitleImport;
 use App\Lg;
 use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use Psy\Util\Json;
 
 class ApiController extends Controller
@@ -94,5 +98,21 @@ class ApiController extends Controller
                 $new_lg->save();
             }
         }
+    }
+
+    public function Title(){
+        return view('Pages.Actions.upload-title-excel');
+    }
+
+    public function uploadTitle(Request $request){
+       Excel::import(new TitleImport(), $request->file('title'));
+    }
+
+    public function uploadDepartment(Request $request){
+       Excel::import(new DepartmentImport(), $request->file('department'));
+    }
+
+    public function uploadDesignation(Request $request){
+       Excel::import(new DesignationImport(), $request->file('designation'));
     }
 }

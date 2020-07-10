@@ -13,7 +13,7 @@
 {{--
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 --}}
-
+    <link href="{{asset('_admin/assets/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Css -->
     <link href="{{asset('_admin/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -31,11 +31,11 @@
 </head>
 <body data-sidebar="dark">
     <div id="layout-wrapper">
-        @include('Admin.layout.header')
-        @include('Admin.layout.sidebar')
+        @include('Pages.layout.header')
+        @include('Pages.layout.sidebar')
         <div class="main-content">
             @yield('contents')
-            @include('Admin.layout.footer')
+            @include('Pages.layout.footer')
         </div>
     </div>
 <script src="{{asset('_admin/assets/libs/jquery/jquery.min.js')}}"></script>
@@ -71,6 +71,8 @@
     <script src="{{asset('_admin/assets/libs/jquery.repeater/jquery.repeater.min.js')}}"></script>
 
     <script src="{{asset('_admin/assets/js/pages/form-repeater.int.js')}}"></script>
+    <script src="{{asset('_admin/assets/libs/dropzone/min/dropzone.min.js')}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script type="text/javascript">
     @if(session('failure'))
       toastr.error('{{session("failure")}}');

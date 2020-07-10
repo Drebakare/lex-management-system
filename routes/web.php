@@ -13,7 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-    Route::get('/', function () {
+    /*Route::get('/', function () {
+        return view('welcome');
+    });*/
+    /*Route::get('update/titles', [
+        'uses' => 'API\ApiController@Title',
+        'as' => 'api.updateTitle'
+    ]);
+
+    Route::post('upload/designation', [
+        'uses' => 'API\ApiController@uploadDesignation',
+        'as' => 'api.uploadDesignation'
+    ]);*/
+
+    Route::get('/upload-title', function () {
         return view('welcome');
     });
 
@@ -25,7 +38,34 @@ use Illuminate\Support\Facades\Route;
         return view('Pages.Actions.Auth.login');
     })->name('login');
 
-    Route::get('api/fetch/states', [
+    Route::post('user/register', [
+        'uses' => 'Auth\AuthController@Register',
+        'as' => 'user.register'
+    ]);
+
+    Route::post('user/login', [
+        'uses' => 'Auth\AuthController@Login',
+        'as' => 'user.login'
+    ]);
+
+    Route::get('user/dashboard', [
+        'uses' => 'Dashboard\DashboardController@Dashboard',
+        'as' => 'user.dashboard'
+    ]);
+
+    Route::get('user/logout', [
+        'uses' => 'Auth\AuthController@Logout',
+        'as' => 'logout'
+    ]);
+
+    Route::get('user/dashboard/add-excel-employee', [
+        'uses' => 'Dashboard\DashboardController@uploadEmployeeExcel',
+        'as' => 'dashboard.upload-excel-employee'
+    ]);
+
+
+
+    /*Route::get('api/fetch/states', [
        'uses' => 'API\ApiController@fetchStates',
        'as' => 'api.fetch-state'
     ]);
@@ -38,7 +78,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('api/fetch/lgs', [
        'uses' => 'API\ApiController@fetchLgs',
        'as' => 'api.fetch-lgs'
-    ]);
+    ]);*/
 
 
 

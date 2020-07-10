@@ -16,7 +16,7 @@
         <link href="{{asset('_admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('_admin/assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
-
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     </head>
 
     <body>
@@ -52,23 +52,17 @@
                                 </a>
                             </div>
                             <div class="p-2">
-                                <form class="form-horizontal" action="">
-
+                                <form class="form-horizontal" action="{{route('user.login')}}" method="post">
+                                    @csrf
                                     <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                        <label for="username">Email</label>
+                                        <input type="text" name="email" class="form-control" id="username" placeholder="Enter username">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="userpassword">Password</label>
-                                        <input type="password" class="form-control" id="userpassword" placeholder="Enter password">
+                                        <input name="password" type="password" class="form-control" id="userpassword" placeholder="Enter password">
                                     </div>
-
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customControlInline">
-                                        <label class="custom-control-label" for="customControlInline">Remember me</label>
-                                    </div>
-
                                     <div class="mt-3">
                                         <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In</button>
                                     </div>
@@ -97,9 +91,23 @@
     <script src="{{asset('_admin/assets/libs/metismenu/metisMenu.min.js')}}"></script>
     <script src="{{asset('_admin/assets/libs/simplebar/simplebar.min.js')}}"></script>
     <script src="{{asset('_admin/assets/libs/node-waves/waves.min.js')}}"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <!-- App js -->
     <script src="{{asset('_admin/assets/js/app.js')}}"></script>
+
+    <script type="text/javascript">
+        @if(session('failure'))
+        toastr.error('{{session("failure")}}');
+        @endif
+        @if(count($errors)>0)
+        @foreach($errors->all() as $error)
+        toastr.error('{{$error}}');
+        @endforeach
+        @endif
+        @if(session('success'))
+        toastr.success('{{session("success")}}');
+        @endif
+    </script>
     </body>
 
 </html>

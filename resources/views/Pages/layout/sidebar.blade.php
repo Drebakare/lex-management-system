@@ -9,81 +9,76 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="{{route('admin.dashboard')}}" class="waves-effect">
-                        <span>Dashboards</span>
+                    <a href="{{--{{route('admin.dashboard')}}--}}" class="waves-effect">
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li>
+                <li >
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-plus"></i>
-                        <span>Store</span>
+                        <span>Employee</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('admin.update-stores')}}">Create/Edit Store</a></li>
-                        {{--<li><a href="layouts-light-sidebar.html">Light Sidebar</a></li>
-                        <li><a href="layouts-compact-sidebar.html">Compact Sidebar</a></li>
-                        <li><a href="layouts-icon-sidebar.html">Icon Sidebar</a></li>
-                        <li><a href="layouts-boxed.html">Boxed Width</a></li>
-                        <li><a href="layouts-preloader.html">Preloader</a></li>
-                        <li><a href="layouts-colored-sidebar.html">Colored Sidebar</a></li>--}}
+                        <li><a href="{{--{{route('admin.update-stores')}}--}}">Add Employee (Single)</a></li>
+                        <li><a href="{{route('dashboard.upload-excel-employee')}}">Add Employees (Excel Sheet)</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="d-none">
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-user"></i>
                         <span>Users</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('admin.view-users')}}">User Management</a></li>
-                        <li><a href="{{route('admin.add-new-user')}}">Add New User</a></li>
+                        {{--<li><a href="{{route('admin.view-users')}}">User Management</a></li>
+                        <li><a href="{{route('admin.add-new-user')}}">Add New User</a></li>--}}
                     </ul>
                 </li>
-                <li>
+                <li class="d-none">
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bxl-product-hunt"></i>
                         <span>Products</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('admin.add-product-brand')}}">Add Product Brand</a></li>
+                       {{-- <li><a href="{{route('admin.add-product-brand')}}">Add Product Brand</a></li>
                         <li><a href="{{route('admin.add-product-category')}}">Add Product Categories </a></li>
                         <li><a href="{{route('admin.add-product-type')}}">Add Product Type </a></li>
-                        <li><a href="{{route('admin.add-new-product')}}">Add Product </a></li>
+                        <li><a href="{{route('admin.add-new-product')}}">Add Product </a></li>--}}
                     </ul>
                 </li>
-                <li>
+                <li class="d-none">
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bxs-cart"></i>
                         <span>Orders</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('admin.add-tables')}}">Add/Edit Table</a></li>
+                        {{--<li><a href="{{route('admin.add-tables')}}">Add/Edit Table</a></li>
                         <li><a href="{{route('admin.raise-order')}}">Raise Order</a></li>
                         <li><a href="{{route('admin.view-orders')}}">My Orders</a></li>
                         <li><a href="{{route('admin.view-all-orders')}}">All Orders</a></li>
-                        <li><a href="{{route('admin.view-activated-orders')}}">My Activated Orders</a></li>
+                        <li><a href="{{route('admin.view-activated-orders')}}">My Activated Orders</a></li>--}}
                     </ul>
                 </li>
-                <li>
+                <li class="d-none">
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-book-bookmark"></i>
                         <span>Bookings</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('admin.add-rooms')}}">Add/Edit Room</a></li>
+                       {{-- <li><a href="{{route('admin.add-rooms')}}">Add/Edit Room</a></li>
                         <li><a href="{{route('admin.add-periods')}}">Add/Edit Period</a></li>
-                        <li><a href="{{route('admin.view-all-bookings')}}">Add/View Booking</a></li>
+                        <li><a href="{{route('admin.view-all-bookings')}}">Add/View Booking</a></li>--}}
                     </ul>
                 </li>
-                <li>
+                <li class="d-none">
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-money"></i>
                         <span>Transactions</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('admin.view-transactions')}}">All Transactions</a></li>
+                        {{--<li><a href="{{route('admin.view-transactions')}}">All Transactions</a></li>
                         <li><a href="{{route('admin.view-subscription-list')}}">View Membership Sub List</a></li>
-                        <li><a href="{{route('admin.view-all-bookings')}}">Add/View Booking</a></li>
+                        <li><a href="{{route('admin.view-all-bookings')}}">Add/View Booking</a></li>--}}
                     </ul>
                 </li>
                 <li class="d-none">
