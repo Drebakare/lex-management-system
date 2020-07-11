@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Bank;
 use App\HomeTown;
 use App\Http\Controllers\Controller;
 use App\Imports\DepartmentImport;
@@ -114,5 +115,36 @@ class ApiController extends Controller
 
     public function uploadDesignation(Request $request){
        Excel::import(new DesignationImport(), $request->file('designation'));
+    }
+
+    public function getBankCode(){
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.paystack.co/bank",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer sk_test_c73dcf5db9c50537e01dd4cb133f7b1b2a2bd181"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $results = json_decode($response);
+        foreach ($results->data as $result){
+            $bank = new Bank();
+            $bank->bank = $result->name;
+            $bank->code = $result->code;
+            $bank->token = Str::random(15);
+            $bank->save();
+        }
     }
 }

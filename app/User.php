@@ -50,14 +50,16 @@ class User extends Authenticatable
         return $this -> belongsTo(Store::class);
     }
 
-    public static function createUser($request, $role_id = 1){
+    public static function createUser($request, $role_id = 1, $store_id = null, $department_id = null){
         $create_user = new User();
         $create_user->email = $request->email;
         $create_user->password = bcrypt($request->password);
-        $create_user->password = bcrypt($request->password);
         $create_user->role_id = $role_id;
+        $create_user->store_id = $store_id;
+        $create_user->department_id = $department_id;
         $create_user->token = Str::random(15);
         $create_user->save();
         return $create_user;
     }
+
 }

@@ -20,18 +20,18 @@
                         <span>Employee</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{--{{route('admin.update-stores')}}--}}">Add Employee (Single)</a></li>
+                        <li><a href="{{route('user.add-employee')}}">Add Employee (Single)</a></li>
                         <li><a href="{{route('dashboard.upload-excel-employee')}}">Add Employees (Excel Sheet)</a></li>
                     </ul>
                 </li>
-                <li class="d-none">
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-user"></i>
                         <span>Users</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        {{--<li><a href="{{route('admin.view-users')}}">User Management</a></li>
-                        <li><a href="{{route('admin.add-new-user')}}">Add New User</a></li>--}}
+                        <li><a href="{{route('user.add-new-user')}}">Add New User</a></li>
+                        <li><a href="{{route('user.add-new-users')}}">Add New User (Excel)</a></li>
                     </ul>
                 </li>
                 <li class="d-none">
