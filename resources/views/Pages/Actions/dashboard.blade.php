@@ -30,7 +30,7 @@
                                     <div class="media">
                                         <div class="media-body">
                                             <p class="text-muted font-weight-medium">Users</p>
-                                            <h4 class="mb-0">{{--{{count($users)}}--}}</h4>
+                                            <h4 class="mb-0">{{count($users)}}</h4>
                                         </div>
 
                                         <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
@@ -48,7 +48,7 @@
                                     <div class="media">
                                         <div class="media-body">
                                             <p class="text-muted font-weight-medium">Employees</p>
-                                            <h4 class="mb-0">{{--{{count($stores)}}--}}</h4>
+                                            <h4 class="mb-0">{{count($employees)}}</h4>
                                         </div>
 
                                         <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
@@ -66,7 +66,7 @@
                                     <div class="media">
                                         <div class="media-body">
                                             <p class="text-muted font-weight-medium">Stores</p>
-                                            <h4 class="mb-0">{{--{{count($orders)}}--}}</h4>
+                                            <h4 class="mb-0">{{count($stores)}}</h4>
                                         </div>
 
                                         <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
@@ -84,7 +84,7 @@
                                     <div class="media">
                                         <div class="media-body">
                                             <p class="text-muted font-weight-medium">Department</p>
-                                            <h4 class="mb-0">{{--{{count($transactions)}}--}}</h4>
+                                            <h4 class="mb-0">{{count($departments)}}</h4>
                                         </div>
 
                                         <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">

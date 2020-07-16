@@ -68,6 +68,26 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.add-new-user'
     ])->middleware('checkAuth');
 
+    Route::get('user/suspend-user/{token}', [
+        'uses' => 'User\UserController@suspendUser',
+        'as' => 'user.suspend-user'
+    ])->middleware('checkAuth');
+
+    Route::get('user/activate-user/{token}', [
+        'uses' => 'User\UserController@activateUser',
+        'as' => 'user.activate-user'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-user-details/{token}', [
+        'uses' => 'User\UserController@editUserDetails',
+        'as' => 'user.edit-user-details'
+    ])->middleware('checkAuth');
+
+    Route::get('user/view-all-users', [
+        'uses' => 'User\UserController@viewUser',
+        'as' => 'user.view-users'
+    ])->middleware('checkAuth');
+
     Route::get('user/add-new-excel-users', [
         'uses' => 'User\UserController@addExcelUsers',
         'as' => 'user.add-new-users'
@@ -98,7 +118,125 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.submit-new-employee'
     ])->middleware('checkAuth');
 
+    Route::get('user/store-settings', [
+        'uses' => 'Settings\SettingController@addStore',
+        'as' => 'user.add-store'
+    ])->middleware('checkAuth');
 
+    Route::post('user/submit-store-form', [
+        'uses' => 'Settings\SettingController@submitStore',
+        'as' => 'user.submit-store'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-store-details/{token}', [
+        'uses' => 'Settings\SettingController@editStoreDetails',
+        'as' => 'user.edit-store-details'
+    ])->middleware('checkAuth');
+
+    Route::get('user/title-settings', [
+        'uses' => 'Settings\SettingController@addTitle',
+        'as' => 'user.add-title'
+    ])->middleware('checkAuth');
+
+    Route::post('user/submit-title-form', [
+        'uses' => 'Settings\SettingController@submitTitle',
+        'as' => 'user.submit-title'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-title-details/{token}', [
+        'uses' => 'Settings\SettingController@editTitleDetails',
+        'as' => 'user.edit-title-details'
+    ])->middleware('checkAuth');
+
+    Route::get('user/state-settings', [
+        'uses' => 'Settings\SettingController@addState',
+        'as' => 'user.add-state'
+    ])->middleware('checkAuth');
+
+    Route::post('user/submit-state-form', [
+        'uses' => 'Settings\SettingController@submitState',
+        'as' => 'user.submit-state'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-state-details/{token}', [
+        'uses' => 'Settings\SettingController@editStateDetails',
+        'as' => 'user.edit-state-details'
+    ])->middleware('checkAuth');
+
+    Route::get('user/role-settings', [
+        'uses' => 'Settings\SettingController@addRole',
+        'as' => 'user.add-role'
+    ])->middleware('checkAuth');
+
+    Route::post('user/submit-role-form', [
+        'uses' => 'Settings\SettingController@submitRole',
+        'as' => 'user.submit-role'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-role-details/{token}', [
+        'uses' => 'Settings\SettingController@editRoleDetails',
+        'as' => 'user.edit-role-details'
+    ])->middleware('checkAuth');
+
+    Route::get('user/rating-settings', [
+        'uses' => 'Settings\SettingController@addRating',
+        'as' => 'user.add-rating'
+    ])->middleware('checkAuth');
+
+    Route::post('user/submit-rating-form', [
+        'uses' => 'Settings\SettingController@submitRating',
+        'as' => 'user.submit-rating'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-rating-details/{token}', [
+        'uses' => 'Settings\SettingController@editRatingDetails',
+        'as' => 'user.edit-rating-details'
+    ])->middleware('checkAuth');
+
+    Route::get('user/bank-settings', [
+        'uses' => 'Settings\SettingController@addBank',
+        'as' => 'user.add-bank'
+    ])->middleware('checkAuth');
+
+    Route::get('user/deactivate-bank/{token}', [
+        'uses' => 'Settings\SettingController@deactivateBank',
+        'as' => 'user.deactivate-bank'
+    ])->middleware('checkAuth');
+
+    Route::get('user/activate-bank/{token}', [
+        'uses' => 'Settings\SettingController@activateBank',
+        'as' => 'user.activate-bank'
+    ])->middleware('checkAuth');
+
+    Route::get('user/designation-settings', [
+        'uses' => 'Settings\SettingController@addDesignation',
+        'as' => 'user.add-designation'
+    ])->middleware('checkAuth');
+
+    Route::post('user/submit-designation-form', [
+        'uses' => 'Settings\SettingController@submitDesignation',
+        'as' => 'user.submit-designation'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-designation-details/{token}', [
+        'uses' => 'Settings\SettingController@editDesignationDetails',
+        'as' => 'user.edit-designation-details'
+    ])->middleware('checkAuth');
+
+    Route::get('user/image-settings', [
+        'uses' => 'Settings\SettingController@addImage',
+        'as' => 'user.add-image'
+    ])->middleware('checkAuth');
+
+    Route::post('user/submit-image-form', [
+        'uses' => 'Settings\SettingController@submitImage',
+        'as' => 'user.submit-image'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-image-details/{token}', [
+        'uses' => 'Settings\SettingController@editImageDetails',
+        'as' => 'user.edit-image-details'
+    ])->middleware('checkAuth');
     /*Route::get('api/fetch/states', [
        'uses' => 'API\ApiController@fetchStates',
        'as' => 'api.fetch-state'

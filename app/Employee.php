@@ -8,7 +8,7 @@ class Employee extends Model
 {
     protected $fillable = [
         'title_id', 'token', 'marital_status_id', 'state_id', 'home_town_id', 'lg_id',
-        'account_details_id', 'first_name', 'other_name', 'surname', 'address', 'phone_number', 'dob',
+        'bvn_id', 'first_name', 'other_name', 'surname', 'address', 'phone_number', 'dob',
 
     ];
 
@@ -32,8 +32,8 @@ class Employee extends Model
         return $this -> belongsTo(Lg::class);
     }
 
-    public function accountDetail(){
-        return $this -> belongsTo(AccountDetail::class);
+    public function bvn(){
+        return $this -> belongsTo(Bvn::class);
     }
 
     public function employeeWorkDetail(){
@@ -82,5 +82,27 @@ class Employee extends Model
 
     public function additionInformation(){
         return $this -> hasOne(AdditionalInformation::class);
+    }
+
+    public static function checkEmployee($bvn){
+        $employee = Employee::where(['first_name' => $bvn->first_name, 'surname' => $bvn->last_name])->first();
+        if ($employee){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static function createEmployee($bvn, $bvn_id){
+        $employee = new Employee();
+        $employee->first_name = $bvn->first_name;
+        $employee->surname = $bvn->last_name;
+        $employee->surname = $bvn->last_name;
+        $employee->phone_number = $bvn->mobile != null ? $bvn->mobile : null;
+        $employee->dob = $bvn->formatted_dob != null ? $bvn->formatted_dob : null;
+        $employee->bvn_id = $bvn_id;
+        $employee->save();
+        return $employee;
     }
 }

@@ -32,17 +32,24 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('user.add-new-user')}}">Add New User</a></li>
                         <li><a href="{{route('user.add-new-users')}}">Add New User (Excel)</a></li>
+                        <li><a href="{{route('user.view-users')}}">View All Users</a></li>
                     </ul>
                 </li>
-                <li class="d-none">
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bxl-product-hunt"></i>
-                        <span>Products</span>
+                        <i class="bx bx-wrench"></i>
+                        <span>System Settings</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                       {{-- <li><a href="{{route('admin.add-product-brand')}}">Add Product Brand</a></li>
-                        <li><a href="{{route('admin.add-product-category')}}">Add Product Categories </a></li>
-                        <li><a href="{{route('admin.add-product-type')}}">Add Product Type </a></li>
+                        <li><a href="{{route('user.add-store')}}"> Add/Edit Store</a></li>
+                        <li><a href="{{route('user.add-title')}}"> Add/Edit Title </a></li>
+                        <li><a href="{{route('user.add-state')}}"> Add/Edit State </a></li>
+                        <li><a href="{{route('user.add-role')}}"> Add/Edit Role </a></li>
+                        <li><a href="{{route('user.add-rating')}}"> Add/Edit Rating </a></li>
+                        <li><a href="{{route('user.add-bank')}}"> Add/Edit Bank </a></li>
+                        <li><a href="{{route('user.add-designation')}}"> Add/Edit Designation </a></li>
+                        <li><a href="{{route('user.add-image')}}"> Add/Edit Image Type </a></li>
+                        {{--<li><a href="{{route('admin.add-product-type')}}">Add Product Type </a></li>
                         <li><a href="{{route('admin.add-new-product')}}">Add Product </a></li>--}}
                     </ul>
                 </li>
