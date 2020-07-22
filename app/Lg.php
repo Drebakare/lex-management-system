@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Lg extends Model
 {
     protected $fillable = [
-        'lg', 'token', 'home_town_id'
+        'lg', 'token', 'state_id'
     ];
 
-    public function homeTown(){
-        return $this -> belongsTo(HomeTown::class);
+    public function state(){
+        return $this -> belongsTo(State::class);
     }
 
     public function employee(){

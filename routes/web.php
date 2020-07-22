@@ -108,6 +108,7 @@ use Illuminate\Support\Facades\Route;
         'as' => 'api.get-bank-code'
     ]);
 
+    //Employee Details
     Route::get('user/add-employee', [
         'uses' => 'Employee\EmployeeController@addEmployee',
         'as' => 'user.add-employee'
@@ -118,6 +119,22 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.submit-new-employee'
     ])->middleware('checkAuth');
 
+    Route::get('user/view-employees', [
+        'uses' => 'Employee\EmployeeController@viewEmployees',
+        'as' => 'user.view-employees'
+    ])->middleware('checkAuth');
+
+    Route::get('user/view-employee-details/{token}', [
+        'uses' => 'Employee\EmployeeController@viewEmployeeDetails',
+        'as' => 'user.view-employee-details'
+    ])->middleware('checkAuth');
+
+    Route::post('user/update-employee-data/{token}', [
+        'uses' => 'Employee\EmployeeController@updateEmployeeDate',
+        'as' => 'user.update-employee-data'
+    ])->middleware('checkAuth');
+
+    // System Settings
     Route::get('user/store-settings', [
         'uses' => 'Settings\SettingController@addStore',
         'as' => 'user.add-store'
@@ -161,6 +178,36 @@ use Illuminate\Support\Facades\Route;
     Route::post('user/edit-state-details/{token}', [
         'uses' => 'Settings\SettingController@editStateDetails',
         'as' => 'user.edit-state-details'
+    ])->middleware('checkAuth');
+
+    Route::get('user/lgs-settings', [
+        'uses' => 'Settings\SettingController@addLgs',
+        'as' => 'user.add-lgs'
+    ])->middleware('checkAuth');
+
+    Route::post('user/submit-lgs-form', [
+        'uses' => 'Settings\SettingController@submitLgs',
+        'as' => 'user.submit-lgs'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-lgs-details/{token}', [
+        'uses' => 'Settings\SettingController@editLgsDetails',
+        'as' => 'user.edit-lgs-details'
+    ])->middleware('checkAuth');
+
+    Route::get('user/home_town-settings', [
+        'uses' => 'Settings\SettingController@addHome',
+        'as' => 'user.add-home-town'
+    ])->middleware('checkAuth');
+
+    Route::post('user/submit-home-town-form', [
+        'uses' => 'Settings\SettingController@submitHome',
+        'as' => 'user.submit-home-town'
+    ])->middleware('checkAuth');
+
+    Route::post('user/edit-home-town-details/{token}', [
+        'uses' => 'Settings\SettingController@editHomeDetails',
+        'as' => 'user.edit-home-town-details'
     ])->middleware('checkAuth');
 
     Route::get('user/role-settings', [
@@ -237,6 +284,10 @@ use Illuminate\Support\Facades\Route;
         'uses' => 'Settings\SettingController@editImageDetails',
         'as' => 'user.edit-image-details'
     ])->middleware('checkAuth');
+
+
+
+
     /*Route::get('api/fetch/states', [
        'uses' => 'API\ApiController@fetchStates',
        'as' => 'api.fetch-state'

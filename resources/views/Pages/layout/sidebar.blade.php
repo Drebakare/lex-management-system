@@ -22,6 +22,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('user.add-employee')}}">Add Employee (Single)</a></li>
                         <li><a href="{{route('dashboard.upload-excel-employee')}}">Add Employees (Excel Sheet)</a></li>
+                        <li><a href="{{route('user.view-employees')}}">View All Employees</a></li>
                     </ul>
                 </li>
                 <li>
@@ -44,6 +45,8 @@
                         <li><a href="{{route('user.add-store')}}"> Add/Edit Store</a></li>
                         <li><a href="{{route('user.add-title')}}"> Add/Edit Title </a></li>
                         <li><a href="{{route('user.add-state')}}"> Add/Edit State </a></li>
+                        <li><a href="{{route('user.add-lgs')}}"> Add/Edit Lgs </a></li>
+                        <li><a href="{{route('user.add-home-town')}}"> Add/Edit Home Town </a></li>
                         <li><a href="{{route('user.add-role')}}"> Add/Edit Role </a></li>
                         <li><a href="{{route('user.add-rating')}}"> Add/Edit Rating </a></li>
                         <li><a href="{{route('user.add-bank')}}"> Add/Edit Bank </a></li>

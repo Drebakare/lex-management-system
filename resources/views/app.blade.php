@@ -13,6 +13,7 @@
 {{--
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 --}}
+    <link rel="stylesheet" href="{{asset('_admin/assets/libs/twitter-bootstrap-wizard/prettify.css')}}">
     <link href="{{asset('_admin/assets/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Css -->
     <link href="{{asset('_admin/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -72,6 +73,12 @@
     <script src="{{asset('_admin/assets/libs/file-upload/file-upload-with-preview.min.js')}}"></script>
     <script src="{{asset('_admin/assets/js/pages/form-repeater.int.js')}}"></script>
     <script src="{{asset('_admin/assets/libs/dropzone/min/dropzone.min.js')}}"></script>
+    <script src="{{asset('_admin/assets/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
+
+    <script src="{{asset('_admin/assets/libs/twitter-bootstrap-wizard/prettify.js')}}"></script>
+
+    <!-- form wizard init -->
+    <script src="{{asset('_admin/assets/js/pages/form-wizard.init.js')}}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script type="text/javascript">
     @if(session('failure'))

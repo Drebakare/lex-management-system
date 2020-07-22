@@ -9,15 +9,14 @@ class Employee extends Model
     protected $fillable = [
         'title_id', 'token', 'marital_status_id', 'state_id', 'home_town_id', 'lg_id',
         'bvn_id', 'first_name', 'other_name', 'surname', 'address', 'phone_number', 'dob',
-
     ];
 
     public function title(){
         return $this -> belongsTo(Title::class);
     }
 
-    public function maritalStatus(){
-        return $this -> belongsTo(MaritalStatus::class);
+    public function marital(){
+        return $this -> belongsTo(Marital::class);
     }
 
     public function state(){
@@ -73,7 +72,7 @@ class Employee extends Model
     }
 
     public function employeeEducation(){
-        return $this -> hasMany(EmployeeEducation::class);
+        return $this -> hasOne(EmployeeEducation::class);
     }
 
     public function assessments(){

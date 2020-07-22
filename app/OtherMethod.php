@@ -22,7 +22,7 @@ class OtherMethod extends Model
             CURLOPT_CUSTOMREQUEST => "GET",
 /*            CURLOPT_POSTFIELDS => array('bvn' => '22305056173', 'bank_code' => '011', 'account_number' => '3033701441'),*/
             CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer sk_test_c73dcf5db9c50537e01dd4cb133f7b1b2a2bd181",
+                "Authorization: Bearer sk_live_09b1d42373768d7321727519e00261b1a06d0906",
             ),
         ));
         $response = curl_exec($curl);
@@ -45,14 +45,13 @@ class OtherMethod extends Model
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer sk_test_c73dcf5db9c50537e01dd4cb133f7b1b2a2bd181",
+                "Authorization: Bearer sk_live_09b1d42373768d7321727519e00261b1a06d0906",
             ),
         ));
 
         $response = curl_exec($curl);
         curl_close($curl);
         $result = json_decode($response);
-        dd($result);
         return $result->data;
     }
 }

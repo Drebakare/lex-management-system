@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Settings;
 
 use App\Bank;
 use App\Designation;
+use App\HomeTown;
 use App\Http\Controllers\Controller;
 use App\ImageType;
+use App\Lg;
 use App\Rating;
 use App\Role;
 use App\State;
@@ -303,6 +305,100 @@ class SettingController extends Controller
             }
             else{
                 return redirect()->back()->with('failure', 'Image Type Details Could not be Updated');
+            }
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function addLgs(){
+        $lgs = Lg::get();
+        $states = State::get();
+        return view('Pages.Actions.Admin.create-lgs', compact('lgs', 'states'));
+    }
+
+    public function submitLgs(Request $request){
+        $this->validate($request, [
+            'lg' => 'bail|required|unique:lgs',
+            'state' => 'bail|required'
+        ]);
+        try {
+            $new_lg = new Lg();
+            $new_lg->lg = $request->lg;
+            $new_lg->state_id = $request->state;
+            $new_lg->token = Str::random(15);
+            $new_lg->save();
+            return redirect()->back()->with('success', 'Lgs  Successfully Created');
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function editLgsDetails(Request $request, $token){
+        $this->validate($request, [
+            'lg' => 'bail|required',
+            'state' => 'bail|required',
+        ]);
+        try {
+            $lg = Lg::where('token', $token)->first();
+            if ($lg){
+                $lg->lg = $request->lg;
+                $lg->state_id = $request->state;
+                $lg->token = Str::random(15);
+                $lg->save();
+                return redirect()->back()->with('success', 'Lg  Successfully Created');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Lg Details Could not be Updated');
+            }
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function addHome(){
+        $homes = HomeTown::get();
+        $states = State::get();
+        return view('Pages.Actions.Admin.create-homes', compact('homes', 'states'));
+    }
+
+    public function submitHome(Request $request){
+        $this->validate($request, [
+            'home_town' => 'bail|required|unique:home_towns',
+            'state' => 'bail|required'
+        ]);
+        try {
+            $new_home_town = new HomeTown();
+            $new_home_town->home_town = $request->home_town;
+            $new_home_town->state_id = $request->state;
+            $new_home_town->token = Str::random(15);
+            $new_home_town->save();
+            return redirect()->back()->with('success', 'Home Town  Successfully Created');
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function editHomeDetails(Request $request, $token){
+        $this->validate($request, [
+            'home_town' => 'bail|required',
+            'state' => 'bail|required'
+        ]);
+        try {
+            $home_town = HomeTown::where('token', $token)->first();
+            if ($home_town){
+                $home_town->home_town = $request->home_town;
+                $home_town->state_id = $request->state;
+                $home_town->token = Str::random(15);
+                $home_town->save();
+                return redirect()->back()->with('success', 'Home Town Successfully Created');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Home Town Details Could not be Updated');
             }
         }
         catch (\Exception $exception){

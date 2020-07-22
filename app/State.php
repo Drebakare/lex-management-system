@@ -14,6 +14,10 @@ class State extends Model
         return $this -> hasMany(HomeTown::class);
     }
 
+    public function Lgs(){
+        return $this -> hasMany(Lg::class);
+    }
+
     public function employee(){
         return $this -> hasMany(Employee::class);
     }
