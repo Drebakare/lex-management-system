@@ -232,14 +232,15 @@
                                     </div>
                                     <div class="tab-pane" id="company-document">
                                         <div>
-                                            <form>
+                                            <form method="post" action="{{route('user.add-employee-education', ['token' => $employee->token])}}">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-pancard-input">Qualification</label>
                                                             <select name="qualification" class="custom-select">
                                                                 @foreach($qualifications as $qualification)
-                                                                    <option value="{{$qualification->id}}" @if($employee->employeeEducation->id == $qualification->id) selected @endif>{{$qualification->name}}</option>
+                                                                    <option value="{{$qualification->id}}">{{$qualification->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -247,9 +248,9 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-vatno-input">State</label>
-                                                            <select name="title" class="custom-select">
+                                                            <select name="state" class="custom-select">
                                                                 @foreach($states as $state)
-                                                                    <option value="{{$state->id}}" @if($employee->employeeEducation) @if($state->id == $employee->employeeEducation->state_id) selected @endif @endif>{{$state->state}}</option>
+                                                                    <option value="{{$state->id}}">{{$state->state}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -258,9 +259,9 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-vatno-input">Home Town</label>
-                                                            <select name="title" class="custom-select">
+                                                            <select name="home_town" class="custom-select">
                                                                 @foreach($homes as $home)
-                                                                    <option value="{{$home->id}}" @if($employee->employeeEducation) @if($home->id == $employee->employeeEducation->home_town_id) selected @endif @endif>{{$home->home_town}}</option>
+                                                                    <option value="{{$home->id}}">{{$home->home_town}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -269,21 +270,21 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-cstno-input">School</label>
-                                                            <input value="{{$employee->employeeEducation ? $employee->employeeEducation->school : '' }}" type="text" class="form-control" id="basicpill-cstno-input">
+                                                            <input name="school"  type="text" class="form-control" id="basicpill-cstno-input">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-servicetax-input">Course</label>
-                                                            <input value="{{$employee->employeeEducation ? $employee->employeeEducation->course : '' }}" type="text" class="form-control" id="basicpill-servicetax-input">
+                                                            <input name="course" value="" type="text" class="form-control" id="basicpill-servicetax-input">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-companyuin-input">Start Date</label>
-                                                            <input value="{{$employee->employeeEducation ? $employee->employeeEducation->start_date : '' }}" type="date" class="form-control" id="basicpill-companyuin-input">
+                                                            <input name="start_date" value="" type="date" class="form-control" id="basicpill-companyuin-input">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -291,25 +292,26 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-declaration-input">End Date</label>
-                                                            <input value="{{$employee->employeeEducation ? $employee->employeeEducation->end_date : '' }}" type="date" class="form-control" id="basicpill-Declaration-input">
+                                                            <input name="end_date" value="" type="date" class="form-control" id="basicpill-Declaration-input">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <hr style="background-color: blue!important;">
+                                                <div class="mt-4">
+                                                    <button type="submit" class="btn btn-outline-primary waves-effect waves-light"> <<< Add Employee Education >>> </button>
+                                                </div>
                                             </form>
                                         </div>
-                                        <ul class="pager wizard twitter-bs-wizard-pager-link">
-                                            <li class="previous"><a href="#">Previous</a></li>
-                                            <li class="next"><a href="#">Next</a></li>
-                                        </ul>
                                     </div>
                                     <div class="tab-pane" id="bank-detail">
                                         <div>
-                                            <form>
+                                            <form method="post" action="{{route('user.add-employee-work-details', ['token' => $employee->token])}}">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label>Store</label>
-                                                            <select name="title" class="custom-select">
+                                                            <select name="store" class="custom-select" required>
                                                                 @foreach($stores as $store)
                                                                     <option value="{{$store->id}}" @if($employee->employeeWorkDetail) @if($store->id == $employee->employeeWorkDetail->store_id) selected @endif @endif>{{$store->store}}</option>
                                                                 @endforeach
@@ -319,7 +321,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label>Department</label>
-                                                            <select name="title" class="custom-select">
+                                                            <select name="department" class="custom-select" required>
                                                                 @foreach($departments as $department)
                                                                     <option value="{{$department->id}}" @if($employee->employeeWorkDetail) @if($department->id == $employee->employeeWorkDetail->department_id) selected @endif @endif>{{$department->department}}</option>
                                                                 @endforeach
@@ -330,7 +332,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label>Designation</label>
-                                                            <select name="title" class="custom-select">
+                                                            <select name="designation" class="custom-select" required>
                                                                 @foreach($designations as $designation)
                                                                     <option value="{{$designation->id}}" @if($employee->employeeWorkDetail) @if($designation->id == $employee->employeeWorkDetail->designation_id) selected @endif @endif>{{$designation->designation}}</option>
                                                                 @endforeach
@@ -341,24 +343,23 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-firstname-input">Start Date</label>
-                                                            <input type="date" value="{{$employee->employeeWorkDetail ? $employee->employeeWorkDetail->start_date : ""}}" class="form-control" id="basicpill-firstname-input" disabled>
+                                                            <input name="start_date"  type="date" value="{{$employee->employeeWorkDetail ? $employee->employeeWorkDetail->start_date : ""}}" class="form-control" id="basicpill-firstname-input" required>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-firstname-input">End Date</label>
-                                                            <input type="date" value="{{$employee->employeeWorkDetail ? $employee->employeeWorkDetail->end_date : ""}}" class="form-control" id="basicpill-firstname-input" disabled>
+                                                            <input name="end_date" type="date" value="{{$employee->employeeWorkDetail ? $employee->employeeWorkDetail->end_date : ""}}" class="form-control" id="basicpill-firstname-input">
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <hr style="background-color: blue!important;">
+                                                <div class="mt-4">
+                                                    <button type="submit" class="btn btn-outline-primary waves-effect waves-light"> <<< Add Employee Education >>> </button>
+                                                </div>
                                             </form>
                                         </div>
-                                        <ul class="pager wizard twitter-bs-wizard-pager-link">
-                                            <li class="previous"><a href="#">Previous</a></li>
-                                            <li class="next"><a href="#">Next</a></li>
-                                        </ul>
                                     </div>
                                     <div class="tab-pane" id="confirm-detail">
                                         <div>

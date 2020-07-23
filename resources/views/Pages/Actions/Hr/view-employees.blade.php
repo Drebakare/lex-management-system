@@ -37,6 +37,7 @@
                                     <th>State</th>
                                     <th>Home Town</th>
                                     <th>Lg</th>
+                                    <th>Reg. Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -64,6 +65,9 @@
                                         </td>
                                         <td>
                                             {{$employee->lg_id != null ? $employee->lg->lg : "Nill"}}
+                                        </td>
+                                        <td>
+                                            {{$employee->registrationStatus!= null ? $employee->registrationStatus->percentage : 0}}
                                         </td>
                                         <td>
                                             <a href="{{route('user.view-employee-details', ['token' => $employee->token])}}">

@@ -257,42 +257,94 @@
                                 <table class="table table-centered table-nowrap mb-0">
                                     <thead class="thead-light">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Phone Number</th>
-                                        <th>Address</th>
+                                        <th>Title</th>
+                                        <th>Surname</th>
+                                        <th>First Name</th>
+                                        <th>Other Name</th>
                                         <th>DOB</th>
-                                        <th>LG</th>
-                                        <th>Home Town</th>
                                         <th>State</th>
-                                        <th>Actions</th>
+                                        <th>Home Town</th>
+                                        <th>Lg</th>
+                                        <th>Reg. Status</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {{--@foreach($latest_transactions as $latest_transaction)--}}
+                                    @foreach($employees as $key => $employee)
                                         <tr>
-                                            {{--<td>{{$latest_transaction->user->email}}</td>
-                                            <td>{{$latest_transaction->transaction_no}}</td>
+                                            <td>{{$employee->title_id != null ? $employee->title->title : "Nill"}}</td>
                                             <td>
-                                                {{$latest_transaction->transaction_type}}
+                                                {{$employee->surname != null ? $employee->surname : "Nill"}}
                                             </td>
                                             <td>
-                                                {{$latest_transaction->store->store_name}}
+                                                {{$employee->first_name != null ? $employee->first_name : "Nill"}}                                        </td>
+                                            <td>
+                                                {{$employee->other_name != null ? $employee->other_name : "Nill"}}
                                             </td>
                                             <td>
-                                                --}}{{--<span class="badge badge-pill badge-soft-success font-size-12">Paid</span>--}}{{--
-                                                {{$latest_transaction->amount}}
+                                                {{$employee->dob != null ? $employee->dob : "Nill"}}
                                             </td>
                                             <td>
-                                                {{$latest_transaction->created_at}}
-                                            </td>--}}
-                                            {{--<td>
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-toggle="modal" data-target=".exampleModal">
-                                                    View Details
-                                                </button>
-                                            </td>--}}
-                                    </tr>
-                                   {{-- @endforeach--}}
+                                                {{$employee->state_id != null ? $employee->state->state : "Nill"}}
+                                            </td>
+                                            <td>
+                                                {{$employee->home_town_id != null ? $employee->homeTown->home_town : "Nill"}}
+                                            </td>
+                                            <td>
+                                                {{$employee->lg_id != null ? $employee->lg->lg : "Nill"}}
+                                            </td>
+                                            <td>
+                                                {{$employee->registrationStatus!= null ? $employee->registrationStatus->percentage : 0}}
+                                            </td>
+                                            <td>
+                                                <a href="{{route('user.view-employee-details', ['token' => $employee->token])}}">
+                                                <span data-toggle="tooltip" data-placement="top" title data-original-title="Edit Employee's Details">
+                                                    <i class="mdi mdi-eye mdi-24px"></i>
+                                                </span>
+                                                </a>
+                                                {{--
+                                                     <a href="{{route('user.activate-user', ['token' => $user->token])}}">
+                                                         <span data-toggle="tooltip" data-placement="top" title data-original-title="Activate User">
+                                                             <i class="mdi mdi-check-outline mdi-24px"></i>
+                                                         </span>
+                                                     </a>
+
+                                                 <a href="#edit-user-{{$key}}" data-toggle="modal" >
+                                                     <span data-toggle="tooltip" data-placement="top" title data-original-title="Edit User's Role">
+                                                         <i class="mdi mdi-account-convert mdi-24px"></i>
+                                                     </span>
+                                                 </a>--}}
+                                                {{--@if($user->role_id == 1)
+                                                    <a href="#edit-user-{{$key}}" data-toggle="modal" >
+                                                        <span data-toggle="tooltip" data-placement="top" title data-original-title="Edit User's Membership Level">
+                                                            <i class="mdi mdi-account-convert mdi-24px"></i>
+                                                        </span>
+                                                    </a>
+                                                @endif
+                                                <a href="{{route('admin.view-user-details', ['token' => $user->token])}}">
+                                                    <span data-toggle="tooltip" data-placement="top" title data-original-title="View User's Details">
+                                                        <i class="mdi mdi-eye-circle mdi-24px"></i>
+                                                    </span>
+                                                </a>
+                                                @if($user->active == 1)
+                                                    <a href="{{route('admin.suspend-user', ['token' => $user->token])}}">
+                                                        <span data-toggle="tooltip" data-placement="top" title data-original-title="Suspend User">
+                                                            <i class="mdi mdi-close-thick mdi-24px"></i>
+                                                        </span>
+                                                    </a>
+                                                @else
+                                                    <a href="{{route('admin.activate-user', ['token' => $user->token])}}">
+                                                        <span data-toggle="tooltip" data-placement="top" title data-original-title="Activate User">
+                                                            <i class="mdi mdi-check-outline mdi-24px"></i>
+                                                        </span>
+                                                    </a>
+                                                @endif--}}
+                                                {{--
+                                                                                            <button class="btn btn-sm btn-outline-primary waves-effect waves-light" data-toggle="modal" data-target="#edit-store-{{$key}}"> Edit</button>
+                                                --}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

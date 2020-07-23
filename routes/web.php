@@ -134,6 +134,16 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.update-employee-data'
     ])->middleware('checkAuth');
 
+    Route::post('user/add-employee-education/{token}', [
+        'uses' => 'Employee\EmployeeController@addEmployeeEducation',
+        'as' => 'user.add-employee-education'
+    ])->middleware('checkAuth');
+
+    Route::post('user/add-employee-work-details/{token}', [
+        'uses' => 'Employee\EmployeeController@addEmployeeWorkDetails',
+        'as' => 'user.add-employee-work-details'
+    ])->middleware('checkAuth');
+
     // System Settings
     Route::get('user/store-settings', [
         'uses' => 'Settings\SettingController@addStore',

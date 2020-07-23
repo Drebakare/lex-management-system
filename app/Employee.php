@@ -40,7 +40,7 @@ class Employee extends Model
     }
 
     public function registrationStatus(){
-        return $this -> hasMany(RegistrationStatus::class);
+        return $this -> hasOne(RegistrationStatus::class);
     }
 
     public function images(){
