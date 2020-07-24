@@ -9,6 +9,8 @@ use App\Designation;
 use App\Employee;
 use App\EmployeeEducation;
 use App\EmployeeWorkDetail;
+use App\EmployeeWorkHistory;
+use App\Gaurantor;
 use App\HomeTown;
 use App\Http\Controllers\Controller;
 use App\Image;
@@ -17,11 +19,11 @@ use App\Marital;
 use App\OtherMethod;
 use App\Qualification;
 use App\RegistrationStatus;
+use App\Relationship;
 use App\State;
 use App\Store;
 use App\Title;
 use App\User;
-use Doctrine\DBAL\Event\SchemaAlterTableEventArgs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -43,7 +45,8 @@ class EmployeeController extends Controller
             $bank = Bank::where('id', $request->bank)->first();
             $account_details = OtherMethod::getAccountDetails($request, $bank->code);
             $bvn_details = OtherMethod::getBvnDetails($request);
-            if (strpos($account_details, $bvn_details->last_name) != false){
+            //dd($account_details, $bvn_details->last_name);
+            if (strpos(strtolower($account_details), strtolower($bvn_details->last_name)) !== false){
                 $new_bvn = Bvn::createAccount($request, $bvn_details, $bank);
                 $check_employee = Employee::checkEmployee($bvn_details);
                 if ($check_employee){
@@ -59,12 +62,13 @@ class EmployeeController extends Controller
                     }
                 }
             }
-            else{
+            else {
                 return redirect()->back()->with('failure', "Names Do Not Match");
+
             }
         }
         catch (\Exception $exception){
-            return redirect()->back()->with('failure', 'Action Could not be Performed');
+            return redirect()->back()->with('failure', "Action Could not Be Performed");
         }
     }
 
@@ -73,7 +77,7 @@ class EmployeeController extends Controller
         return view('Pages.Actions.Hr.view-employees', compact('employees'));
     }
 
-    public function viewEmployeeDetails($token){
+    public function updateEmployeeDetails($token){
         $employee = Employee::where('token', $token)->first();
         $titles = Title::get();
         $maritals = Marital::get();
@@ -84,10 +88,20 @@ class EmployeeController extends Controller
         $designations = Designation::get();
         $departments = Department::get();
         $stores = Store::get();
+        $relationships = Relationship::get();
         if ($employee){
             return view('Pages.Actions.Hr.employee-details', compact('employee',
                 'titles', 'maritals', 'lgs', 'states', 'homes', 'qualifications', 'departments',
-            'stores', 'designations'));
+            'stores', 'designations', 'relationships'));
+        }else{
+            return redirect()->back()->with('failure', 'Employee Does not Exist');
+        }
+    }
+
+    public function viewEmployeeDetails($token){
+        $employee = Employee::fetchEmployee($token);
+        if ($employee){
+            return view('Pages.Actions.Hr.employee-information', compact('employee'));
         }else{
             return redirect()->back()->with('failure', 'Employee Does not Exist');
         }
@@ -174,6 +188,77 @@ class EmployeeController extends Controller
                     $create_status->save();
                 }
                 return redirect()->back()->with('success', "Employee Details Successfully updated");
+            }
+            else{
+                    return redirect()->back()->with('failure', 'Employee Does Not Exist');
+            }
+        }
+        catch(\Exception $exception){
+            return redirect()->back()->with('failure', 'Action Could not Be Performed');
+        }
+    }
+    public function updateEmployeeGuarantor(Request $request, $token){
+        $this->validate($request, [
+            'name' => 'bail|required|unique:gaurantors',
+            'relationship' => 'bail|required',
+            'state' => 'bail|required',
+            'home_town' => 'bail|required',
+            'lg' => 'bail|required',
+            'occupation' => 'bail|required',
+            'phone_number' => 'bail|required',
+            'address' => 'bail|required',
+        ]);
+        try {
+            if (!$request->hasFile('signature') || !$request->hasFile('passport')){
+                return redirect()->back()->with('failure', 'Ensure All Files Are Properly Uploaded');
+            }
+            if($request->file('signature')->getSize() > 5000000 )
+            {
+                return redirect()->back()->with('failure', "Uploaded File Size is Larger than 5mb");
+            }
+            if($request->file('passport')->getSize() > 5000000 )
+            {
+                return redirect()->back()->with('failure', "Uploaded File Size is Larger than 5mb");
+            }
+
+            $employee = Employee::where('token', $token)->first();
+            if ($employee){
+                $new_guarantor = new Gaurantor();
+                $image = $request->file('passport');
+                $image_name = User::processImage($image);
+                $new_guarantor->passport = $image_name;
+
+                $signature = $request->file('signature');
+                $signature_name = User::processImage($signature);
+                $new_guarantor->signature = $signature_name;
+
+                $new_guarantor->employee_id = $employee->id;
+                $new_guarantor->state_id = $request->state;
+                $new_guarantor->home_town_id = $request->home_town;
+                $new_guarantor->lg_id = $request->lg;
+                $new_guarantor->relationship_id = $request->relationship;
+                $new_guarantor->name = $request->name;
+                $new_guarantor->address = $request->address;
+                $new_guarantor->phone_number = $request->phone_number;
+                $new_guarantor->occupation = $request->occupation;
+                $new_guarantor->token = Str::random(15);
+                $new_guarantor->save();
+
+                $detail_status = RegistrationStatus::where('employee_id', $employee->id)->first();
+                if ($detail_status){
+                    if ($detail_status->percentage < 100){
+                        $detail_status->percentage = 100;
+                        $detail_status->save();
+                    }
+                }
+                else{
+                    $create_status = new RegistrationStatus();
+                    $create_status->employee_id = $employee->id;
+                    $create_status->token = Str::random(15);
+                    $create_status->percentage = 100;
+                    $create_status->save();
+                }
+                return redirect()->back()->with('success', "Employee Guarantor's Details Successfully updated");
             }
             else{
                     return redirect()->back()->with('failure', 'Employee Does Not Exist');
@@ -279,6 +364,66 @@ class EmployeeController extends Controller
                         $create_status->save();
                     }
                     return redirect()->back()->with('success', 'Employee Work Details Successfully Added');
+                }
+            }
+            else{
+                return redirect()->back()->with('failure', 'Employee Details Does not Exist');
+            }
+        }
+        catch (\Exception $exception){
+            return redirect()->back()->with('failure', 'Action Could Not Be Performed');
+        }
+    }
+
+    public function addEmployeeEmploymentHistory(Request $request, $token){
+        $this->validate($request, [
+            'state' => 'bail|required',
+            'home_town' => 'bail|required',
+            'job' => 'bail|required',
+            'start_date' => 'bail|required',
+            'end_date' => 'bail|required',
+            'place' => 'bail|required',
+            'salary' => 'bail|required',
+            'responsibility' => 'bail|required',
+            'reason' => 'bail|required',
+        ]);
+        try {
+            $employee = Employee::fetchEmployee($token);
+            if ($employee){
+                $check_job = EmployeeWorkHistory::where(['employee_id' => $employee->id, 'work_place' => $request->place])->first();
+                if ($check_job){
+                    return redirect()->back()->with('failure', 'Work Place already added for this employee');
+                }
+                else{
+                    $new_work_history =  new EmployeeWorkHistory();
+                    $new_work_history->employee_id = $employee->id;
+                    $new_work_history->state_id = $request->state;
+                    $new_work_history->home_town_id = $request->home_town;
+                    $new_work_history->job_title = $request->job;
+                    $new_work_history->work_place = $request->place;
+                    $new_work_history->salary_collected = $request->salary;
+                    $new_work_history->start_date = $request->start_date;
+                    $new_work_history->end_date = $request->end_date;
+                    $new_work_history->responsibility_description = $request->responsibility;
+                    $new_work_history->reason = $request->reason;
+                    $new_work_history->token = Str::random(15);
+                    $new_work_history->save();
+
+                    $detail_status = RegistrationStatus::where('employee_id', $employee->id)->first();
+                    if ($detail_status){
+                        if ($detail_status->percentage < 80){
+                            $detail_status->percentage = 80;
+                            $detail_status->save();
+                        }
+                    }
+                    else{
+                        $create_status = new RegistrationStatus();
+                        $create_status->employee_id = $employee->id;
+                        $create_status->token = Str::random(15);
+                        $create_status->percentage = 80;
+                        $create_status->save();
+                    }
+                    return redirect()->back()->with('success', 'Employee Work History Successfully Added');
                 }
             }
             else{

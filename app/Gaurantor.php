@@ -8,7 +8,7 @@ class Gaurantor extends Model
 {
     protected $fillable = [
         'employee_id', 'token', 'state_id', 'home_town_id', 'lg_id', 'relationship_id',
-        'name', 'address', 'signature', 'phone_number', 'occupation',
+        'name', 'address', 'signature', 'phone_number', 'occupation', 'passport'
 
     ];
 

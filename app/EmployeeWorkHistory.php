@@ -17,7 +17,7 @@ class EmployeeWorkHistory extends Model
         return $this -> belongsTo(Employee::class);
     }
 
-    public function state_id(){
+    public function state(){
         return $this -> belongsTo(State::class);
     }
 

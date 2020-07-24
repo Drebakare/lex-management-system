@@ -38,13 +38,20 @@
                                     <li class="nav-item">
                                         <a href="#bank-detail" class="nav-link" data-toggle="tab">
                                             <span class="step-number mr-2">03</span>
-                                            Employment Details
+                                            Work Details
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#confirm-detail" class="nav-link" data-toggle="tab">
                                             <span class="step-number mr-2">04</span>
-                                            Add Employment History
+                                            Add Job History
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="#guarantor" class="nav-link" data-toggle="tab">
+                                            <span class="step-number mr-2">05</span>
+                                            Add Guarantor
                                         </a>
                                     </li>
                                 </ul>
@@ -363,12 +370,13 @@
                                     </div>
                                     <div class="tab-pane" id="confirm-detail">
                                         <div>
-                                            <form>
+                                            <form method="post" action="{{route('user.add-employee-employment-history', ['token' => $employee->token])}}">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-vatno-input">State</label>
-                                                            <select name="title" class="custom-select">
+                                                            <select name="state" class="custom-select">
                                                                 @foreach($states as $state)
                                                                     <option value="{{$state->id}}">{{$state->state}}</option>
                                                                 @endforeach
@@ -379,7 +387,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-vatno-input">Home Town</label>
-                                                            <select name="title" class="custom-select">
+                                                            <select name="home_town" class="custom-select">
                                                                 @foreach($homes as $home)
                                                                     <option value="{{$home->id}}" >{{$home->home_town}}</option>
                                                                 @endforeach
@@ -390,57 +398,212 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-cstno-input">Job Title</label>
-                                                            <input type="text" class="form-control" id="basicpill-cstno-input">
+                                                            <input name="job" type="text" class="form-control" id="basicpill-cstno-input">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-cstno-input">Work Place</label>
-                                                            <input type="text" class="form-control" id="basicpill-cstno-input">
+                                                            <input name="place" type="text" class="form-control" id="basicpill-cstno-input">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-cstno-input">Salary Collected</label>
-                                                            <input type="number" min="500" class="form-control" id="basicpill-cstno-input">
+                                                            <input name="salary" type="number" min="500" class="form-control" id="basicpill-cstno-input">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-companyuin-input">Start Date</label>
-                                                            <input type="date" class="form-control" id="basicpill-companyuin-input">
+                                                            <input name="start_date" type="date" class="form-control" id="basicpill-companyuin-input">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-declaration-input">End Date</label>
-                                                            <input  type="date" class="form-control" id="basicpill-Declaration-input">
+                                                            <input name="end_date"  type="date" class="form-control" id="basicpill-Declaration-input">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-address-input">Responsibility Description</label>
-                                                            <textarea id="basicpill-address-input" class="form-control" rows="2"> </textarea>
+                                                            <textarea name="responsibility" id="basicpill-address-input" class="form-control" rows="2"> </textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="basicpill-address-input">Reason For Leave</label>
-                                                            <textarea id="basicpill-address-input" class="form-control" rows="2"></textarea>
+                                                            <textarea name="reason" id="basicpill-address-input" class="form-control" rows="2"></textarea>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
+                                                <hr style="background-color: blue!important;">
+                                                <div class="mt-4">
+                                                    <button type="submit" class="btn btn-outline-primary waves-effect waves-light"> <<< Add Employee Employment History >>> </button>
+                                                </div>
                                             </form>
                                         </div>
-                                        <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                    </div>
+                                    <div class="tab-pane" id="guarantor">
+                                        <form action="{{route('user.update-employee-guarantor', ['token' => $employee->token])}}" method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>State</label>
+                                                        <select name="state" class="custom-select">
+                                                            @foreach($states as $state)
+                                                                <option value="{{$state->id}}">{{$state->state}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Home Town</label>
+                                                        <select name="home_town" class="custom-select">
+                                                            @foreach($homes as $home)
+                                                                <option value="{{$home->id}}">{{$home->home_town}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Local Govt.</label>
+                                                        <select name="lg" class="custom-select">
+                                                            @foreach($lgs as $lg)
+                                                                <option value="{{$lg->id}}">{{$lg->lg}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Relationship</label>
+                                                        <select name="relationship" class="custom-select">
+                                                            @foreach($relationships as $relationship)
+                                                                <option value="{{$relationship->id}}" >{{$relationship->relationship}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="basicpill-firstname-input">Full name</label>
+                                                        <input name="name" type="text" class="form-control" id="basicpill-firstname-input" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="basicpill-lastname-input">Occupation</label>
+                                                        <input name="occupation"  type="text" class="form-control" id="basicpill-lastname-input" >
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="basicpill-phoneno-input">Phone</label>
+                                                        <input name="phone_number" type="tel" class="form-control" id="basicpill-phoneno-input">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="basicpill-address-input">Address</label>
+                                                        <textarea name="address" id="basicpill-address-input" class="form-control" rows="2"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="custom-file-container"
+                                                         data-upload-id="upload-signature">
+                                                        <label for="payment_proof_sell" class="text-sm"
+                                                               style="font-family: OpenSans, sans-serif; color: #373e45; font-size: 18px; margin-top: 20px"
+                                                        >
+                                                            Upload Guarantor's Signature
+                                                            <a
+                                                                href="javascript:void(0)"
+                                                                class="custom-file-container__image-clear"
+                                                                id="close_image_preview-bitcoin-sell"
+                                                                title="Clear Image"
+                                                                style="color: red"
+                                                            >
+                                                                x
+                                                            </a>
+                                                        </label>
+                                                        <label
+                                                            class="custom-file-container__custom-file"
+                                                            style="margin-bottom: 15px;"
+                                                        >
+                                                            <input type="file" name="signature"
+                                                                   class="custom-file-container__custom-file__custom-file-input"
+                                                                   id="payment_proof-bitcoin-sell" accept="image/jpeg">
+                                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760"/>
+                                                            <span
+                                                                class="custom-file-container__custom-file__custom-file-control"
+                                                                style="font-family: Quicksand, sans-serif;"></span>
+                                                        </label>
+                                                        <div
+                                                            class="custom-file-container__image-preview"
+                                                            id="image-preview-placeholder-bitcoin-sell"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="custom-file-container"
+                                                         data-upload-id="upload-guarantor">
+                                                        <label for="payment_proof_sell" class="text-sm"
+                                                               style="font-family: OpenSans, sans-serif; color: #373e45; font-size: 18px; margin-top: 20px"
+                                                        >
+                                                            Upload Guarantor's Passport
+                                                            <a
+                                                                href="javascript:void(0)"
+                                                                class="custom-file-container__image-clear"
+                                                                id="close_image_preview-bitcoin-sell"
+                                                                title="Clear Image"
+                                                                style="color: red"
+                                                            >
+                                                                x
+                                                            </a>
+                                                        </label>
+                                                        <label
+                                                            class="custom-file-container__custom-file"
+                                                            style="margin-bottom: 15px;"
+                                                        >
+                                                            <input type="file" name="passport"
+                                                                   class="custom-file-container__custom-file__custom-file-input"
+                                                                   id="payment_proof-bitcoin-sell" accept="image/jpeg"
+                                                            >
+                                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760"/>
+                                                            <span
+                                                                class="custom-file-container__custom-file__custom-file-control"
+                                                                style="font-family: Quicksand, sans-serif;"></span>
+                                                        </label>
+                                                        <div
+                                                            class="custom-file-container__image-preview"
+                                                            id="image-preview-placeholder-bitcoin-sell"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr style="background-color: blue!important;">
+                                            <div class="mt-4">
+                                                <button type="submit" class="btn btn-outline-primary waves-effect waves-light"> <<< Add Employee Gaurantor's Details >>> </button>
+                                            </div>
+                                        </form>
+                                        {{--<ul class="pager wizard twitter-bs-wizard-pager-link">
                                             <li class="previous"><a href="#">Previous</a></li>
                                             <li class="next"><a href="#">Next</a></li>
-                                        </ul>
+                                        </ul>--}}
                                     </div>
                                 </div>
                             </div>
@@ -454,6 +617,8 @@
 @section('script_contents')
     <script>
         var firstUpload = new FileUploadWithPreview('upload-passport')
+        var firstUpload = new FileUploadWithPreview('upload-signature')
+        var firstUpload = new FileUploadWithPreview('upload-guarantor')
         var secondUpload = new FileUploadWithPreview('upload-user-picture')
     </script>
 @endsection

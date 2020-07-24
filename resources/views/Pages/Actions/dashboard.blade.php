@@ -294,7 +294,7 @@
                                                 {{$employee->lg_id != null ? $employee->lg->lg : "Nill"}}
                                             </td>
                                             <td>
-                                                {{$employee->registrationStatus!= null ? $employee->registrationStatus->percentage : 0}}
+                                                {{$employee->registrationStatus!= null ? $employee->registrationStatus->percentage.'%' : 0}}
                                             </td>
                                             <td>
                                                 <a href="{{route('user.view-employee-details', ['token' => $employee->token])}}">

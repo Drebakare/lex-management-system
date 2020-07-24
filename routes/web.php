@@ -124,6 +124,11 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.view-employees'
     ])->middleware('checkAuth');
 
+    Route::get('user/update-employee-details/{token}', [
+        'uses' => 'Employee\EmployeeController@updateEmployeeDetails',
+        'as' => 'user.update-employee-details'
+    ])->middleware('checkAuth');
+
     Route::get('user/view-employee-details/{token}', [
         'uses' => 'Employee\EmployeeController@viewEmployeeDetails',
         'as' => 'user.view-employee-details'
@@ -134,6 +139,11 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.update-employee-data'
     ])->middleware('checkAuth');
 
+    Route::post('user/update-employee-guarantor/{token}', [
+        'uses' => 'Employee\EmployeeController@updateEmployeeGuarantor',
+        'as' => 'user.update-employee-guarantor'
+    ])->middleware('checkAuth');
+
     Route::post('user/add-employee-education/{token}', [
         'uses' => 'Employee\EmployeeController@addEmployeeEducation',
         'as' => 'user.add-employee-education'
@@ -142,6 +152,11 @@ use Illuminate\Support\Facades\Route;
     Route::post('user/add-employee-work-details/{token}', [
         'uses' => 'Employee\EmployeeController@addEmployeeWorkDetails',
         'as' => 'user.add-employee-work-details'
+    ])->middleware('checkAuth');
+
+    Route::post('user/add-employee-employment-history/{token}', [
+        'uses' => 'Employee\EmployeeController@addEmployeeEmploymentHistory',
+        'as' => 'user.add-employee-employment-history'
     ])->middleware('checkAuth');
 
     // System Settings

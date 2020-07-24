@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Employee extends Model
 {
@@ -44,7 +45,7 @@ class Employee extends Model
     }
 
     public function images(){
-        return $this -> hasMany(Image::class);
+        return $this->hasMany(Image::class);
     }
 
     public function queries(){
@@ -101,7 +102,12 @@ class Employee extends Model
         $employee->phone_number = $bvn->mobile != null ? $bvn->mobile : null;
         $employee->dob = $bvn->formatted_dob != null ? $bvn->formatted_dob : null;
         $employee->bvn_id = $bvn_id;
+        $employee->token = Str::random(15);
         $employee->save();
         return $employee;
+    }
+
+    public static function fetchEmployee($token){
+        return Employee::where('token', $token)->first();
     }
 }
