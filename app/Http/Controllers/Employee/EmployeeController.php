@@ -40,7 +40,6 @@ class EmployeeController extends Controller
             'account_number' => 'bail|required|unique:bvns',
             'bank' => 'bail|required'
         ]);
-
         try {
             $bank = Bank::where('id', $request->bank)->first();
             $account_details = OtherMethod::getAccountDetails($request, $bank->code);
@@ -64,7 +63,6 @@ class EmployeeController extends Controller
             }
             else {
                 return redirect()->back()->with('failure', "Names Do Not Match");
-
             }
         }
         catch (\Exception $exception){

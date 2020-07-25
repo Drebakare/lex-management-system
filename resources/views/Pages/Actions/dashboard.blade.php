@@ -48,7 +48,7 @@
                                     <div class="media">
                                         <div class="media-body">
                                             <p class="text-muted font-weight-medium">Employees</p>
-                                            <h4 class="mb-0">{{count($employees)}}</h4>
+                                            <h4 class="mb-0">{{count($employee_numbers)}}</h4>
                                         </div>
 
                                         <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">

@@ -130,7 +130,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title mb-5">Work History</h4>
-                            @if($employee->employeeWorkHistory)
+                            @if(count($employee->employeeWorkHistory) > 0)
                                 <div class="">
                                     <ul class="verti-timeline list-unstyled">
                                         @foreach($employee->employeeWorkHistory as $history)
@@ -151,7 +151,6 @@
                                                             <span>Home Town : {{ $history->homeTown->home_town}}</span><br>
                                                             <span>Salary : {{ $history->salary_collected}}</span><br>
                                                             <span>responsibility : {{ $history->responsibility_description}}</span><br>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,7 +159,7 @@
                                     </ul>
                                 </div>
                             @else
-                                <h5 class="card-title mb-5">No Work History</h5>
+                                <h5>No Work History</h5>
                             @endif
 
                         </div>
@@ -169,7 +168,6 @@
                 </div>
 
                 <div class="col-xl-8">
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
@@ -184,32 +182,28 @@
                                                     <td>{{$employee->employeeWorkDetail->is_active == 1 ? 'Active' : "Inactive"}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Other Name :</th>
-                                                    <td>{{$employee->other_name ? $employee->other_name : "nill" }}</td>
+                                                    <th scope="row">Department :</th>
+                                                    <td>{{$employee->employeeWorkDetail->department ? $employee->employeeWorkDetail->department->department : "Nill"}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Mobile :</th>
-                                                    <td>{{$employee->phone_number ? $employee->phone_number : "nill"}}</td>
+                                                    <th scope="row">Designation :</th>
+                                                    <td>{{$employee->employeeWorkDetail->designation ? $employee->employeeWorkDetail->designation->designation : "Nill"}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">DOB :</th>
-                                                    <td>{{$employee->dob}}</td>
+                                                    <th scope="row">Store :</th>
+                                                    <td>{{$employee->employeeWorkDetail->store ? $employee->employeeWorkDetail->store->store : "Nill"}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">State :</th>
-                                                    <td>{{$employee->state ?  $employee->state->state : "nill"}}</td>
+                                                    <th scope="row">Start Date :</th>
+                                                    <td>{{$employee->employeeWorkDetail ? $employee->employeeWorkDetail->start_date : "Nill"}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Home Town :</th>
-                                                    <td>{{$employee->homeTown ?  $employee->homeTown->home_town : "nill"}}</td>
+                                                    <th scope="row">End Date :</th>
+                                                    <td>{{$employee->employeeWorkDetail->end_date != null ? $employee->employeeWorkDetail->end_date : "Nill"}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Lg :</th>
-                                                    <td>{{$employee->lg ?  $employee->lg->lg : "nill"}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"> Address :</th>
-                                                    <td>{{$employee->address ? $employee->address : "nill"}}</td>
+                                                    <th scope="row">Query Count :</th>
+                                                    <td>{{$employee->employeeWorkDetail ? $employee->employeeWorkDetail->query_count : "Nill"}}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -225,20 +219,17 @@
                                 <div class="card-body">
                                     <div class="media">
                                         <div class="media-body">
-                                            <p class="text-muted font-weight-medium">Pending Projects</p>
-                                            <h4 class="mb-0">12</h4>
+                                            <p class="text-muted font-weight-medium">Full Picture</p>
+                                            <div class="">
+                                                <img src="{{$employee->images ? asset('uploads/'.$employee->images[1]->image_name) : asset('uploads/man.png')}}" class="img-fluid" alt="Responsive image">
+                                            </div>
                                         </div>
 
-                                        <div class="avatar-sm align-self-center mini-stat-icon rounded-circle bg-primary">
-                                                        <span class="avatar-title">
-                                                            <i class="bx bx-hourglass font-size-24"></i>
-                                                        </span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        {{--<div class="col-md-4">
                             <div class="card mini-stats-wid">
                                 <div class="card-body">
                                     <div class="media">
@@ -255,88 +246,234 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
-                    <div class="card">
+                    {{--<div class="card">
                         <div class="card-body">
                             <h4 class="card-title mb-4">Revenue</h4>
                             <div id="revenue-chart" class="apex-charts"></div>
                         </div>
-                    </div>
-
+                    </div>--}}
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">My Projects</h4>
+                            <h4 class="card-title mb-4">Employee Education History</h4>
                             <div class="table-responsive">
                                 <table class="table table-nowrap table-hover mb-0">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Projects</th>
+                                        <th scope="col">Qualification</th>
+                                        <th scope="col">State</th>
+                                        <th scope="col">Home Town</th>
+                                        <th scope="col">School</th>
+                                        <th scope="col">Course</th>
                                         <th scope="col">Start Date</th>
-                                        <th scope="col">Deadline</th>
-                                        <th scope="col">Budget</th>
+                                        <th scope="col">End Date</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Skote admin UI</td>
-                                        <td>2 Sep, 2019</td>
-                                        <td>20 Oct, 2019</td>
-                                        <td>$506</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Skote admin Logo</td>
-                                        <td>1 Sep, 2019</td>
-                                        <td>2 Sep, 2019</td>
-                                        <td>$94</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Redesign - Landing page</td>
-                                        <td>21 Sep, 2019</td>
-                                        <td>29 Sep, 2019</td>
-                                        <td>$156</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <td>App Landing UI</td>
-                                        <td>29 Sep, 2019</td>
-                                        <td>04 Oct, 2019</td>
-                                        <td>$122</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">5</th>
-                                        <td>Blog Template</td>
-                                        <td>05 Oct, 2019</td>
-                                        <td>16 Oct, 2019</td>
-                                        <td>$164</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">6</th>
-                                        <td>Redesign - Multipurpose Landing</td>
-                                        <td>17 Oct, 2019</td>
-                                        <td>05 Nov, 2019</td>
-                                        <td>$192</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">7</th>
-                                        <td>Logo Branding</td>
-                                        <td>04 Nov, 2019</td>
-                                        <td>05 Nov, 2019</td>
-                                        <td>$94</td>
-                                    </tr>
+                                    @if($employee->employeeEducation)
+                                        @foreach($employee->employeeEducation as $education)
+                                            <tr>
+                                                <td>{{$education->qualification->name}}</td>
+                                                <td>{{$education->state->state}}</td>
+                                                <td>{{$education->homeTown->home_town}}</td>
+                                                <td>{{$education->school}}</td>
+                                                <td>{{$education->course}}</td>
+                                                <td>{{$education->start_date}}</td>
+                                                <td>{{$education->end_date}}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            No Data
+                                        </tr>
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <h4>Guarantor's Details</h4>
+                        @if(count($employee->gaurantor)>0)
+                            @foreach($employee->gaurantor as $gaurantor)
+                                <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="card-title mb-4">Guarantor's Details</h4>
+                                            <div class="table-responsive">
+                                                <table class="table table-nowrap mb-0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th scope="row"> Name:</th>
+                                                        <td>{{$gaurantor ? $gaurantor->name : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"> Occupation :</th>
+                                                        <td>{{$gaurantor ? $gaurantor->occupation : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"> Phone Number :</th>
+                                                        <td>{{$gaurantor ? $gaurantor->phone_number : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"> Relationship :</th>
+                                                        <td>{{$gaurantor ? $gaurantor->relationship->relationship : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"> State :</th>
+                                                        <td>{{$gaurantor ? $gaurantor->state->state : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"> Home Town :</th>
+                                                        <td>{{$gaurantor ? $gaurantor->homeTown->home_town : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"> Lg :</th>
+                                                        <td>{{$gaurantor ? $gaurantor->lg->lg : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"> Address :</th>
+                                                        <td>{{$gaurantor ? $gaurantor->address : "Nill"}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <p class="text-muted font-weight-medium">Guarantor's Passport</p>
+                                                    <div class="">
+                                                        <img src="{{$gaurantor ? asset('uploads/'.$gaurantor->passport) : asset('uploads/man.png')}}" class="img-fluid" alt="Responsive image">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <p class="text-muted font-weight-medium">Guarantor's Signature</p>
+                                                    <div class="">
+                                                        <img src="{{$gaurantor ? asset('uploads/'.$gaurantor->signature) : asset('uploads/man.png')}}" class="img-fluid" alt="Responsive image">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        @else
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col-md-12">
+                                        <h5>No Information Provided Yet</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                        {{--@if($employee->employeeGuarantor)
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4">Guarantor's Details</h4>
+                                        @if($employee->employeeWorkDetail)
+                                            <div class="table-responsive">
+                                                <table class="table table-nowrap mb-0">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th scope="row"> Status:</th>
+                                                        <td>{{$employee->employeeWorkDetail->is_active == 1 ? 'Active' : "Inactive"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Department :</th>
+                                                        <td>{{$employee->employeeWorkDetail->department ? $employee->employeeWorkDetail->department->department : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Designation :</th>
+                                                        <td>{{$employee->employeeWorkDetail->designation ? $employee->employeeWorkDetail->designation->designation : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Store :</th>
+                                                        <td>{{$employee->employeeWorkDetail->store ? $employee->employeeWorkDetail->store->store : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Start Date :</th>
+                                                        <td>{{$employee->employeeWorkDetail ? $employee->employeeWorkDetail->start_date : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">End Date :</th>
+                                                        <td>{{$employee->employeeWorkDetail->end_date != null ? $employee->employeeWorkDetail->end_date : "Nill"}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Query Count :</th>
+                                                        <td>{{$employee->employeeWorkDetail ? $employee->employeeWorkDetail->query_count : "Nill"}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        @else
+                                            <h5 class="card-title mb-4">Not Yet Updated</h5>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Guarantor's Passport</p>
+                                                <div class="">
+                                                    <img src="{{$employee->images ? asset('uploads/'.$employee->images[1]->image_name) : asset('uploads/man.png')}}" class="img-fluid" alt="Responsive image">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Guarantor's Signature</p>
+                                                <div class="">
+                                                    <img src="{{$employee->images ? asset('uploads/'.$employee->images[1]->image_name) : asset('uploads/man.png')}}" class="img-fluid" alt="Responsive image">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                             <h4>No Information Provided Yet</h4>
+                        @endif--}}
+                        {{--<div class="col-md-4">
+                            <div class="card mini-stats-wid">
+                                <div class="card-body">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <p class="text-muted font-weight-medium">Total Revenue</p>
+                                            <h4 class="mb-0">$36,524</h4>
+                                        </div>
+
+                                        <div class="avatar-sm align-self-center mini-stat-icon rounded-circle bg-primary">
+                                                        <span class="avatar-title">
+                                                            <i class="bx bx-package font-size-24"></i>
+                                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>--}}
                 </div>
             </div>
-            <!-- end row -->
         </div>
     </div>
 @endsection

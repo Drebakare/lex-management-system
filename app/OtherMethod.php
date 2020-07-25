@@ -28,6 +28,7 @@ class OtherMethod extends Model
         $response = curl_exec($curl);
         curl_close($curl);
         $result = json_decode($response);
+        //dd($result);
         $full_name = $result->data->account_name;
         return $full_name;
     }

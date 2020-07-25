@@ -73,7 +73,7 @@ class Employee extends Model
     }
 
     public function employeeEducation(){
-        return $this -> hasOne(EmployeeEducation::class);
+        return $this -> hasMany(EmployeeEducation::class);
     }
 
     public function assessments(){

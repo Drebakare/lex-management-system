@@ -13,10 +13,11 @@ class DashboardController extends Controller
 {
     public function Dashboard(){
         $stores = Store::get();
-        $employees = Employee::get();
+        $employee_numbers = Employee::get();
+        $employees = Employee::orderBy('id', 'desc')->take(5)->get();
         $users = User::get();
         $departments = Department::get();
-        return view('Pages.Actions.dashboard', compact('stores', 'employees', 'users', 'departments'));
+        return view('Pages.Actions.dashboard', compact('stores', 'employees', 'users', 'departments', 'employee_numbers'));
     }
 
     public function uploadEmployeeExcel(){
