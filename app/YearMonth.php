@@ -18,4 +18,18 @@ class YearMonth extends Model
     public function monthlySalaries(){
         return $this -> hasMany(MonthlySalary::class);
     }
+
+    public static function createYearMonth($request){
+        $session = YearMonth::where(['year_id' => $request->year, 'month_id' => $request->month])->first();
+        if ($session){
+            return $session;
+        }
+        else{
+            $create_session = YearMonth::create([
+                "month_id" => $request->month,
+                'year_id' =>  $request->year,
+            ]);
+            return $create_session;
+        }
+    }
 }

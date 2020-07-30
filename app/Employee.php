@@ -113,7 +113,19 @@ class Employee extends Model
 
     public static function employeeList($department = null){
         if (!$department){
-            $employee = Employee::get();
+            $employee = Employee::whereHas('employeeWorkDetail', function($query){
+                $query->where('is_active', 1);
+            })->whereHas('registrationStatus', function ($pass){
+                $pass->where('percentage', 100);
+            })->get();
         }
+        else{
+            $employee = Employee::whereHas('employeeWorkDetail', function($query) use($department){
+                $query->where('is_active', 1)->where('department_id', $department);
+            })->whereHas('registrationStatus', function ($pass){
+                $pass->where('percentage', 100);
+            })->get();
+        }
+        return $employee;
     }
 }

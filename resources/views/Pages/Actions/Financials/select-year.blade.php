@@ -22,13 +22,13 @@
                         <div class="card-body">
                             <h4 class="card-title">Session Information</h4>
                             <h6>Kindly supply correct information</h6>
-                            <form method="post" action="{{--{{route('user.submit-new-employee')}}--}}">
+                            <form method="post" action="{{route('user.process-salary')}}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="control-label">Year</label>
-                                            <select name="bank" class="form-control select2"  required>
+                                            <select name="year" class="form-control select2"  required>
                                                 @foreach($years as $year)
                                                     <option value="{{$year->id}}"  >{{$year->year}}</option>
                                                 @endforeach
@@ -38,7 +38,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="control-label">Month</label>
-                                            <select name="bank" class="form-control select2"  required>
+                                            <select name="month" class="form-control select2"  required>
                                                 @foreach($months as $month)
                                                     <option value="{{$month->id}}" >{{$month->month}}</option>
                                                 @endforeach

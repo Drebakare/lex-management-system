@@ -44,7 +44,7 @@ class EmployeeController extends Controller
             $bank = Bank::where('id', $request->bank)->first();
             $account_details = OtherMethod::getAccountDetails($request, $bank->code);
             $bvn_details = OtherMethod::getBvnDetails($request);
-            //dd($account_details, $bvn_details->last_name);
+            /*dd($account_details, $bvn_details->last_name);*/
             if (strpos(strtolower($account_details), strtolower($bvn_details->last_name)) !== false){
                 $new_bvn = Bvn::createAccount($request, $bvn_details, $bank);
                 $check_employee = Employee::checkEmployee($bvn_details);

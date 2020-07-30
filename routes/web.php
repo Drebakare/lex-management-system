@@ -351,6 +351,18 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.salary-initial'
     ]);
 
+    Route::post('user/process-salary', [
+        'uses' => 'Financials\FinancialController@processSalary',
+        'as' => 'user.process-salary'
+    ]);
+
+    Route::post('user/final-salary-process/{token}', [
+        'uses' => 'Financials\FinancialController@finalSalaryProcess',
+        'as' => 'user.final-salary-process'
+    ]);
+
+
+
     Route::get('employee/{token}', [
         'uses' => 'API\ApiController@fetchEmployeeDetails',
         'as' => 'api.fetch-employee-details'
