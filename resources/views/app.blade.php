@@ -29,6 +29,18 @@
     <link href="{{asset('_admin/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('_admin/assets/libs/file-upload/file-upload-with-preview.min.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <style>
+        .vl {
+            border-left: 4px solid navy;
+            height: 65px;
+        }
+        #qrcode {
+            width: 128px;
+            height: 128px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
 </head>
 <body data-sidebar="dark">
     <div id="layout-wrapper">
@@ -80,6 +92,11 @@
     <!-- form wizard init -->
     <script src="{{asset('_admin/assets/js/pages/form-wizard.init.js')}}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="{{asset('_admin/assets/jquery-qrcode-master/src/jquery.qrcode.js')}}"></script>
+    <script type="text/javascript" src="{{asset('_admin/assets/jquery-qrcode-master/src/qrcode.js')}}"></script>
+    <script src=
+            "https://files.codepedia.info/files/uploads/iScripts/html2canvas.js">
+    </script>
     <script type="text/javascript">
     @if(session('failure'))
       toastr.error('{{session("failure")}}');

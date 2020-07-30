@@ -13,60 +13,76 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-
-                <li >
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-plus"></i>
-                        <span>Employee</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('user.add-employee')}}">Add Employee (Single)</a></li>
-                        <li><a href="{{route('dashboard.upload-excel-employee')}}">Add Employees (Excel Sheet)</a></li>
-                        <li><a href="{{route('user.view-employees')}}">View All Employees</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-user"></i>
-                        <span>Users</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('user.add-new-user')}}">Add New User</a></li>
-                        <li><a href="{{route('user.add-new-users')}}">Add New User (Excel)</a></li>
-                        <li><a href="{{route('user.view-users')}}">View All Users</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-wrench"></i>
-                        <span>System Settings</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('user.add-store')}}"> Add/Edit Store</a></li>
-                        <li><a href="{{route('user.add-title')}}"> Add/Edit Title </a></li>
-                        <li><a href="{{route('user.add-state')}}"> Add/Edit State </a></li>
-                        <li><a href="{{route('user.add-lgs')}}"> Add/Edit Lgs </a></li>
-                        <li><a href="{{route('user.add-home-town')}}"> Add/Edit Home Town </a></li>
-                        <li><a href="{{route('user.add-role')}}"> Add/Edit Role </a></li>
-                        <li><a href="{{route('user.add-rating')}}"> Add/Edit Rating </a></li>
-                        <li><a href="{{route('user.add-bank')}}"> Add/Edit Bank </a></li>
-                        <li><a href="{{route('user.add-designation')}}"> Add/Edit Designation </a></li>
-                        <li><a href="{{route('user.add-image')}}"> Add/Edit Image Type </a></li>
-                        {{--<li><a href="{{route('admin.add-product-type')}}">Add Product Type </a></li>
-                        <li><a href="{{route('admin.add-new-product')}}">Add Product </a></li>--}}
-                    </ul>
-                </li>
-                <li class="d-none">
+                @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-plus"></i>
+                            <span>Employee</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('user.add-employee')}}">Add Employee (Single)</a></li>
+                            <li><a href="{{route('dashboard.upload-excel-employee')}}">Add Employees (Excel Sheet)</a></li>
+                            <li><a href="{{route('user.view-employees')}}">View All Employees</a></li>
+                        </ul>
+                    </li>
+                @endif
+                {{--@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)--}}
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-money"></i>
+                            <span>Financials</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('user.salary-initial')}}">Initial Salary Process</a></li>
+                           {{-- <li><a href="{{route('dashboard.upload-excel-employee')}}">Add Employees (Excel Sheet)</a></li>
+                            <li><a href="{{route('user.view-employees')}}">View All Employees</a></li>--}}
+                        </ul>
+                    </li>
+                {{--@endif--}}
+                @if(Auth::user()->role_id == 1)
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-user"></i>
+                            <span>Users</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('user.add-new-user')}}">Add New User</a></li>
+                            <li><a href="{{route('user.add-new-users')}}">Add New User (Excel)</a></li>
+                            <li><a href="{{route('user.view-users')}}">View All Users</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-wrench"></i>
+                            <span>System Settings</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('user.add-store')}}"> Add/Edit Store</a></li>
+                            <li><a href="{{route('user.add-title')}}"> Add/Edit Title </a></li>
+                            <li><a href="{{route('user.add-state')}}"> Add/Edit State </a></li>
+                            <li><a href="{{route('user.add-lgs')}}"> Add/Edit Lgs </a></li>
+                            <li><a href="{{route('user.add-home-town')}}"> Add/Edit Home Town </a></li>
+                            <li><a href="{{route('user.add-role')}}"> Add/Edit Role </a></li>
+                            <li><a href="{{route('user.add-rating')}}"> Add/Edit Rating </a></li>
+                            <li><a href="{{route('user.add-bank')}}"> Add/Edit Bank </a></li>
+                            <li><a href="{{route('user.add-designation')}}"> Add/Edit Designation </a></li>
+                            <li><a href="{{route('user.add-image')}}"> Add/Edit Image Type </a></li>
+                            {{--<li><a href="{{route('admin.add-product-type')}}">Add Product Type </a></li>
+                            <li><a href="{{route('admin.add-new-product')}}">Add Product </a></li>--}}
+                        </ul>
+                    </li>
+                @endif
+                {{--<li class="d-none">
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bxs-cart"></i>
                         <span>Orders</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        {{--<li><a href="{{route('admin.add-tables')}}">Add/Edit Table</a></li>
+                        --}}{{--<li><a href="{{route('admin.add-tables')}}">Add/Edit Table</a></li>
                         <li><a href="{{route('admin.raise-order')}}">Raise Order</a></li>
                         <li><a href="{{route('admin.view-orders')}}">My Orders</a></li>
                         <li><a href="{{route('admin.view-all-orders')}}">All Orders</a></li>
-                        <li><a href="{{route('admin.view-activated-orders')}}">My Activated Orders</a></li>--}}
+                        <li><a href="{{route('admin.view-activated-orders')}}">My Activated Orders</a></li>--}}{{--
                     </ul>
                 </li>
                 <li class="d-none">
@@ -75,9 +91,9 @@
                         <span>Bookings</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                       {{-- <li><a href="{{route('admin.add-rooms')}}">Add/Edit Room</a></li>
+                       --}}{{-- <li><a href="{{route('admin.add-rooms')}}">Add/Edit Room</a></li>
                         <li><a href="{{route('admin.add-periods')}}">Add/Edit Period</a></li>
-                        <li><a href="{{route('admin.view-all-bookings')}}">Add/View Booking</a></li>--}}
+                        <li><a href="{{route('admin.view-all-bookings')}}">Add/View Booking</a></li>--}}{{--
                     </ul>
                 </li>
                 <li class="d-none">
@@ -86,9 +102,9 @@
                         <span>Transactions</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        {{--<li><a href="{{route('admin.view-transactions')}}">All Transactions</a></li>
+                        --}}{{--<li><a href="{{route('admin.view-transactions')}}">All Transactions</a></li>
                         <li><a href="{{route('admin.view-subscription-list')}}">View Membership Sub List</a></li>
-                        <li><a href="{{route('admin.view-all-bookings')}}">Add/View Booking</a></li>--}}
+                        <li><a href="{{route('admin.view-all-bookings')}}">Add/View Booking</a></li>--}}{{--
                     </ul>
                 </li>
                 <li class="d-none">
@@ -367,7 +383,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li>--}}
 
             </ul>
         </div>

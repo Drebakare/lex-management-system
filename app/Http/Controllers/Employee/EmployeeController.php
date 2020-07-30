@@ -99,7 +99,12 @@ class EmployeeController extends Controller
     public function viewEmployeeDetails($token){
         $employee = Employee::fetchEmployee($token);
         if ($employee){
-            return view('Pages.Actions.Hr.employee-information', compact('employee'));
+            if ($employee->registrationStatus->percentage == 100){
+                return view('Pages.Actions.Hr.employee-information', compact('employee'));
+            }
+            else{
+                return redirect()->back()->with('failure', 'All Employee Information Must Be Fully Filled Before This Action Can Be Performed');
+            }
         }else{
             return redirect()->back()->with('failure', 'Employee Does not Exist');
         }
@@ -430,6 +435,24 @@ class EmployeeController extends Controller
         }
         catch (\Exception $exception){
             return redirect()->back()->with('failure', 'Action Could Not Be Performed');
+        }
+    }
+
+    public function printEmployeeCard($token){
+        $employee = Employee::fetchEmployee($token);
+        if ($employee){
+            if ($employee->registrationStatus->percentage == 100){
+                if (!$employee->api_token){
+                    $employee->api_token = Str::random(20);
+                    $employee->save();
+                }
+                return view('Pages.Actions.Hr.employee-card', compact('employee'));
+            }
+            else{
+                return redirect()->back()->with('failure', 'All Employee Information Must Be Fully Filled Before This Action Can Be Performed');
+            }
+        }else{
+            return redirect()->back()->with('failure', 'Employee Does not Exist');
         }
     }
 }

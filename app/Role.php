@@ -10,7 +10,7 @@ class Role extends Model
       'role', 'token'
     ];
 
-    public function users(){
-        return $this -> hasMany(User::class);
+    public function user(){
+        return $this -> hasOne(User::class);
     }
 }

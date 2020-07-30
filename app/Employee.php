@@ -9,7 +9,7 @@ class Employee extends Model
 {
     protected $fillable = [
         'title_id', 'token', 'marital_status_id', 'state_id', 'home_town_id', 'lg_id',
-        'bvn_id', 'first_name', 'other_name', 'surname', 'address', 'phone_number', 'dob',
+        'bvn_id', 'first_name', 'other_name', 'surname', 'address', 'phone_number', 'dob', 'staff_id', 'api_token'
     ];
 
     public function title(){
@@ -109,5 +109,11 @@ class Employee extends Model
 
     public static function fetchEmployee($token){
         return Employee::where('token', $token)->first();
+    }
+
+    public static function employeeList($department = null){
+        if (!$department){
+            $employee = Employee::get();
+        }
     }
 }

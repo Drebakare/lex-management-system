@@ -360,7 +360,6 @@
                             </div>
                         </div>
             --}}
-
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -376,8 +375,8 @@
                     <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle mr-1"></i> My
                         Wallet</a>--}}
                     <a class="dropdown-item text-center d-block" href="#">{{--<i
-                            class="bx bx-wrench font-size-16 align-middle mr-1"></i>--}} {{Auth::user()->role->role}}</a>
-                    <a class="dropdown-item d-block" href="#"><i
+                            class="bx bx-wrench font-size-16 align-middle mr-1"></i>--}} {{Auth::user()->Role->role}}</a>
+                    <a class="dropdown-item d-block" href="{{route('user.change-password')}}"><i
                             class="bx bx-wrench font-size-16 align-middle mr-1"></i> Account Settings</a>
                     {{--<a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle mr-1"></i>
                         Lock screen</a>--}}

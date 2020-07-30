@@ -38,14 +38,12 @@
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-
-
                                 <tbody>
                                 @foreach($users as $key => $user)
                                     <tr>
                                         <td>{{$user->email}}</td>
                                         <td>
-                                            {{$user->role->role}}
+                                            {{$user->Role->role}}
                                         </td>
                                         <td>
                                             {{$user->department_id != null ? $user->department->department : "Nill" }}

@@ -81,6 +81,12 @@
                                                     <i class="mdi mdi-eye-check mdi-24px"></i>
                                                 </span>
                                             </a>
+
+                                            <a href="{{route('user.print-employee-card', ['token' => $employee->token])}}">
+                                                <span data-toggle="tooltip" data-placement="top" title data-original-title="View ID Card">
+                                                    <i class="mdi mdi-printer mdi-24px"></i>
+                                                </span>
+                                            </a>
                                            {{--
                                                 <a href="{{route('user.activate-user', ['token' => $user->token])}}">
                                                     <span data-toggle="tooltip" data-placement="top" title data-original-title="Activate User">
@@ -196,3 +202,20 @@
     </div><!-- /.modal -->
     @endforeach--}}
 @endsection
+{{--@section('script_contents')
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            const coinTable = $('#datatable-buttons').DataTable({
+                responsive: true,
+                bPaginate: true,
+                bLengthChange: false,
+                bFilter: true,
+                bInfo: true,
+                bAutoWidth: true,
+                pageLength : 10,
+                order:[[8,'desc']]
+            });
+        })
+    </script>
+@endsection--}}
+

@@ -10,10 +10,12 @@ use App\Imports\DesignationImport;
 use App\Imports\TitleImport;
 use App\Lg;
 use App\State;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Psy\Util\Json;
+use SimpleSoftwareIO\QrCode\Generator;
 
 class ApiController extends Controller
 {
@@ -146,5 +148,12 @@ class ApiController extends Controller
             $bank->token = Str::random(15);
             $bank->save();
         }
+    }
+
+    public function checkTest(){
+        $file = public_path('uploads/qr-code.png');
+        $qrcode = new Generator;
+        $qrcode->size(500)->format('png')->generate('Make a qrcode without Laravel!', $file);
+
     }
 }

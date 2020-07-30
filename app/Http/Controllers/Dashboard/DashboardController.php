@@ -21,6 +21,6 @@ class DashboardController extends Controller
     }
 
     public function uploadEmployeeExcel(){
-        return view('Actions.Hr.new-employee-excel');
+        return view('Pages.Actions.Hr.new-employees-excel');
     }
 }
