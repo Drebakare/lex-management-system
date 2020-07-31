@@ -9,7 +9,7 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="{{--{{route('admin.dashboard')}}--}}" class="waves-effect">
+                    <a href="{{route('user.dashboard')}}" class="waves-effect">
                         <span>Dashboard</span>
                     </a>
                 </li>
@@ -29,8 +29,8 @@
                 {{--@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)--}}
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-money"></i>
-                            <span>Financials</span>
+                            <i class="bx bx bx-upload"></i>
+                            <span>Managers' Corner</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{route('user.salary-initial')}}">Initial Salary Process</a></li>

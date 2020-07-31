@@ -39,7 +39,7 @@
                                     <div class="pt-4">
                                         <div>
                                             <div class="col-12" style="margin-left: -70px">
-                                                <h4 class="font-size-24" style="color: navy; font-weight: bolder" >{{$employee->surname ." ". $employee->first_name ." ". $employee->other_name}}</h4>
+                                                <h4 class="font-size-24" style="color: navy; font-weight: bolder" >{{strtoupper($employee->surname) ." ". $employee->first_name ." ". $employee->other_name}}</h4>
                                                 <h4 class="font-size-20 mb-0" style="color: red; font-weight: bold">{{$employee->employeeWorkDetail->designation->designation}}</h4>
                                             </div>
                                         </div>
@@ -58,7 +58,7 @@
                                             <div class="col-3 row" style="margin-left: -50px;">
                                                 <div class="col-md-8">
                                                     <h6 style="color: navy; font-size: 12px"> Staff ID:</h6>
-                                                    <h6 style="color: #a2a2a2; font-size: 10px !important; margin-top: -5px">{{$employee->employeeWorkDetail->start_date}}</h6>
+                                                    <h6 style="color: #a2a2a2; font-size: 10px !important; margin-top: -5px">{{$employee->staff_id}}</h6>
                                                     <h6 style="color: navy; font-size: 12px"> Date of Issue:</h6>
                                                     <h6 style="color: #a2a2a2; font-size: 10px !important; margin-top: -5px; margin-bottom: -10px">{{date("Y/m/d")}}</h6>
                                                 </div>

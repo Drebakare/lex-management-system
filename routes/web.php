@@ -351,17 +351,24 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.salary-initial'
     ]);
 
-    Route::post('user/process-salary', [
+    Route::get('user/process-salary', [
         'uses' => 'Financials\FinancialController@processSalary',
         'as' => 'user.process-salary'
     ]);
 
-    Route::post('user/final-salary-process/{token}', [
-        'uses' => 'Financials\FinancialController@finalSalaryProcess',
-        'as' => 'user.final-salary-process'
+    Route::post('user/submit-final-salary', [
+        'uses' => 'Financials\FinancialController@submitFinalSalary',
+        'as' => 'user.submit-final-salary'
     ]);
 
+    Route::post('user/update-final-salary/{token}', [
+        'uses' => 'Financials\FinancialController@updateFinalSalary',
+        'as' => 'user.update-final-salary'
+    ]);
 
+    /*Route::post('user/final-salary-process/{token}', function () {
+       dd('uthekrhejrhejrer');
+    });*/
 
     Route::get('employee/{token}', [
         'uses' => 'API\ApiController@fetchEmployeeDetails',

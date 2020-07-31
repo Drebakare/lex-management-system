@@ -446,6 +446,18 @@ class EmployeeController extends Controller
                     $employee->api_token = Str::random(20);
                     $employee->save();
                 }
+
+                if (!$employee->staff_id){
+                    $start_yr = substr($employee->employeeWorkDetail->start_date,0,4);
+                    $employee_department_id = $employee->employeeWorkDetail->department_id;
+                    $employees = Employee::whereHas('employeeWorkDetail', function($query) use($employee_department_id){
+                        $query->where('department_id', $employee_department_id);
+                    })->get();
+                    $last_employee = $employees->last();
+                    $staff_id = $employee->employeeWorkDetail->department->acronym. '/'. $start_yr. '/'.($last_employee->id + 1);
+                    $employee->staff_id = $staff_id;
+                    $employee->save();
+                }
                 return view('Pages.Actions.Hr.employee-card', compact('employee'));
             }
             else{

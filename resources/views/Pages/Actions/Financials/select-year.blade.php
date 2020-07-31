@@ -22,7 +22,7 @@
                         <div class="card-body">
                             <h4 class="card-title">Session Information</h4>
                             <h6>Kindly supply correct information</h6>
-                            <form method="post" action="{{route('user.process-salary')}}">
+                            <form method="get" action="{{route('user.process-salary')}}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
