@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Middleware\checkAccount;
 use App\Http\Middleware\checkAdmin;
 use App\Http\Middleware\checkAuth;
 use App\Http\Middleware\checkHr;
+use App\Http\Middleware\checkManager;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -346,60 +348,64 @@ use Illuminate\Support\Facades\Route;
 
     });
 
-    Route::get('user/process-initial-salary', [
-        'uses' => 'Financials\FinancialController@initialSalary',
-        'as' => 'user.salary-initial'
-    ]);
+    Route::middleware([checkManager::class])->group(function (){
+        Route::get('user/process-initial-salary', [
+            'uses' => 'Financials\FinancialController@initialSalary',
+            'as' => 'user.salary-initial'
+        ]);
 
-    Route::get('user/process-salary', [
-        'uses' => 'Financials\FinancialController@processSalary',
-        'as' => 'user.process-salary'
-    ]);
+        Route::get('user/process-salary', [
+            'uses' => 'Financials\FinancialController@processSalary',
+            'as' => 'user.process-salary'
+        ]);
 
-    Route::post('user/submit-final-salary', [
-        'uses' => 'Financials\FinancialController@submitFinalSalary',
-        'as' => 'user.submit-final-salary'
-    ]);
+        Route::post('user/submit-final-salary', [
+            'uses' => 'Financials\FinancialController@submitFinalSalary',
+            'as' => 'user.submit-final-salary'
+        ]);
 
-    Route::get('user/account-update-salary', [
-        'uses' => 'Account\AccountController@viewAccountForm',
-        'as' => 'user.account-update-salary'
-    ]);
+        Route::post('user/update-final-salary/{token}', [
+            'uses' => 'Financials\FinancialController@updateFinalSalary',
+            'as' => 'user.update-final-salary'
+        ]);
+    });
 
-    Route::get('user/account-process-salary', [
-        'uses' => 'Account\AccountController@accountProcessSalary',
-        'as' => 'user.account-process-salary'
-    ]);
+    Route::middleware([checkAccount::class])->group(function (){
+        Route::get('user/account-update-salary', [
+            'uses' => 'Account\AccountController@viewAccountForm',
+            'as' => 'user.account-update-salary'
+        ]);
 
-    Route::post('user/update-final-salary/{token}', [
-        'uses' => 'Financials\FinancialController@updateFinalSalary',
-        'as' => 'user.update-final-salary'
-    ]);
+        Route::get('user/account-process-salary', [
+            'uses' => 'Account\AccountController@accountProcessSalary',
+            'as' => 'user.account-process-salary'
+        ]);
 
-    Route::post('user/account-final-salary', [
-        'uses' => 'Account\AccountController@accountFinalSalary',
-        'as' => 'user.account-final-salary'
-    ]);
+        Route::post('user/account-final-salary', [
+            'uses' => 'Account\AccountController@accountFinalSalary',
+            'as' => 'user.account-final-salary'
+        ]);
 
-    Route::get('user/preview-salary', [
-        'uses' => 'Account\AccountController@previewSalary',
-        'as' => 'user.preview-salary'
-    ]);
+        Route::get('user/preview-salary', [
+            'uses' => 'Account\AccountController@previewSalary',
+            'as' => 'user.preview-salary'
+        ]);
 
-    Route::get('user/submit-preview-salary', [
-        'uses' => 'Account\AccountController@submitPreviewSalary',
-        'as' => 'user.submit-preview-salary'
-    ]);
+        Route::get('user/submit-preview-salary', [
+            'uses' => 'Account\AccountController@submitPreviewSalary',
+            'as' => 'user.submit-preview-salary'
+        ]);
 
-    Route::get('user/preview-salary-list', [
-        'uses' => 'Account\AccountController@previewSalaryList',
-        'as' => 'user.preview-salary-list'
-    ]);
+        Route::get('user/preview-salary-list', [
+            'uses' => 'Account\AccountController@previewSalaryList',
+            'as' => 'user.preview-salary-list'
+        ]);
 
-    Route::get('user/print-salary-list', [
-        'uses' => 'Account\AccountController@printSalaryList',
-        'as' => 'user.print-salary-list'
-    ]);
+        Route::get('user/print-salary-list', [
+            'uses' => 'Account\AccountController@printSalaryList',
+            'as' => 'user.print-salary-list'
+        ]);
+    });
 
 /*Route::post('user/final-salary-process/{token}', function () {
    dd('uthekrhejrhejrer');

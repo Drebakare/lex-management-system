@@ -26,7 +26,7 @@
                         </ul>
                     </li>
                 @endif
-                {{--@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)--}}
+                @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 4)
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx bx-upload"></i>
@@ -38,6 +38,8 @@
                             <li><a href="{{route('user.view-employees')}}">View All Employees</a></li>--}}
                         </ul>
                     </li>
+                @endif
+                @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 3)
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx bx-money"></i>
@@ -51,7 +53,7 @@
                             <li><a href="{{route('user.view-employees')}}">View All Employees</a></li>--}}
                         </ul>
                     </li>
-                {{--@endif--}}
+                @endif
                 @if(Auth::user()->role_id == 1)
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
