@@ -361,14 +361,39 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.submit-final-salary'
     ]);
 
+    Route::get('user/account-update-salary', [
+        'uses' => 'Account\AccountController@viewAccountForm',
+        'as' => 'user.account-update-salary'
+    ]);
+
+    Route::get('user/account-process-salary', [
+        'uses' => 'Account\AccountController@accountProcessSalary',
+        'as' => 'user.account-process-salary'
+    ]);
+
     Route::post('user/update-final-salary/{token}', [
         'uses' => 'Financials\FinancialController@updateFinalSalary',
         'as' => 'user.update-final-salary'
     ]);
 
-    /*Route::post('user/final-salary-process/{token}', function () {
-       dd('uthekrhejrhejrer');
-    });*/
+    Route::post('user/account-final-salary', [
+        'uses' => 'Account\AccountController@accountFinalSalary',
+        'as' => 'user.account-final-salary'
+    ]);
+
+    Route::get('user/preview-salary', [
+        'uses' => 'Account\AccountController@previewSalary',
+        'as' => 'user.preview-salary'
+    ]);
+
+    Route::get('user/submit-preview-salary', [
+        'uses' => 'Account\AccountController@submitPreviewSalary',
+        'as' => 'user.submit-preview-salary'
+    ]);
+
+/*Route::post('user/final-salary-process/{token}', function () {
+   dd('uthekrhejrhejrer');
+});*/
 
     Route::get('employee/{token}', [
         'uses' => 'API\ApiController@fetchEmployeeDetails',

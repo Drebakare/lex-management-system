@@ -43,9 +43,9 @@ class FinancialController extends Controller
         return view("Pages.Actions.Financials.upload-salary", compact('employees', 'employee_salaries', 'year_month'));
     }
 
+
     public function submitFinalSalary(Request $request){
         try {
-
             $session = YearMonth::where('token', $request->year_month)->first();
             if (!$session) return redirect()->back()->with('failure', 'Session Does not Exist');
             $check_data = true;
@@ -63,6 +63,7 @@ class FinancialController extends Controller
                 $shortage_value = 'shortage_'.$i;
                 $bonus_value = 'bonus_'.$i;
                 $employee_id = 'employee_id_'.$i;
+                $sales = 'sales_'.$i;
                 $employee = Employee::where('id', $request->$employee_id)->first();
                 $data = [
                     'absentism' => $request->$absentism_value,
@@ -95,6 +96,9 @@ class FinancialController extends Controller
                 if ($request->$shortage_value){
                     $new_salary->shortage = $request->$shortage_value;
                 }
+                if ($request->$sales){
+                    $new_salary->sales = $request->$sales;
+                }
                 if ($request->$bonus_value){
                     $new_salary->bonus = $request->$bonus_value;
                 }
@@ -125,6 +129,7 @@ class FinancialController extends Controller
                 $shortage_value = 'shortage_'.$i;
                 $bonus_value = 'bonus_'.$i;
                 $employee_id = 'employee_id_'.$i;
+                $sales = 'sales_'.$i;
                 $employee = Employee::where('id', $request->$employee_id)->first();
                 if (!$employee) continue;
                 $data = [
@@ -154,6 +159,9 @@ class FinancialController extends Controller
                 }
                 if ($request->$shortage_value){
                     $update_salary->shortage = $request->$shortage_value;
+                }
+                if ($request->$sales){
+                    $update_salary->sales = $request->$sales;
                 }
                 if ($request->$bonus_value){
                     $update_salary->bonus = $request->$bonus_value;

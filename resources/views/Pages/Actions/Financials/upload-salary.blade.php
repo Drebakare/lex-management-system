@@ -41,6 +41,7 @@
                                                 <th>Absentism</th>
                                                 <th>Shortage</th>
                                                 <th>Bonus</th>
+                                                <th>sales</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,6 +54,7 @@
                                                     <td><input name="absentism_{{$key}}" type="number" placeholder="Absentism"  /></td>
                                                     <td><input name="shortage_{{$key}}" type="number" placeholder="Shortage"  /></td>
                                                     <td><input name="bonus_{{$key}}" type="number" placeholder="Bonus"  /></td>
+                                                    <td><input name="sales_{{$key}}" type="number"  placeholder="Sales"  /></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -75,6 +77,7 @@
                                             <th>Absentism</th>
                                             <th>Shortage</th>
                                             <th>Bonus</th>
+                                            <th>Sales</th>
                                         </tr>
                                         </thead>
 
@@ -88,6 +91,7 @@
                                                 <td><input name="absentism_{{$key}}" value="{{$employee_salaries[$key]->days_absent}}" type="number" placeholder="Absentism"  /></td>
                                                 <td><input name="shortage_{{$key}}" value="{{$employee_salaries[$key]->shortage}}" type="number" placeholder="Shortage"  /></td>
                                                 <td><input name="bonus_{{$key}}" value="{{$employee_salaries[$key]->bonus}}"  type="number" placeholder="Bonus" /></td>
+                                                <td><input name="sales_{{$key}}" value="{{$employee_salaries[$key]->sales}}"  type="number" placeholder="Sales" /></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

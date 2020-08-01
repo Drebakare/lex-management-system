@@ -11,7 +11,7 @@ class MonthlySalary extends Model
         'employee_id', 'token', 'store_id', 'department_id', 'filled_by',
         'year_month_id', 'basic_salary', 'absentism', 'shortage', 'tax_paid',
         'pension_paid', 'housing_allowance', 'transport_allowance', 'leave_allowance',
-        '13th_allowance', 'bonus', 'savings'
+        '13th_allowance', 'bonus', 'savings','loan', 'card', 'days_absent',
 
     ];
 
@@ -38,6 +38,16 @@ class MonthlySalary extends Model
     public static function getSalary($employee, $session){
         $salary = MonthlySalary::where(["employee_id" => $employee, "year_month_id" => $session->id])->first();
         return $salary ;
+    }
+
+    public static function getSalaries( $session){
+        $salary = MonthlySalary::where([ "year_month_id" => $session])->get();
+        return $salary ;
+    }
+
+    public static function getSalaryBySalary( $session, $department_id){
+        $salaries = MonthlySalary::where(["year_month_id" => $session, 'department_id' => $department_id])->get();
+        return $salaries ;
     }
 
     public static function calcBasicSalary($main_salary){
