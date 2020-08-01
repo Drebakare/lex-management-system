@@ -27,48 +27,10 @@
                                Kindly fill the following details appropriately
                             </p>
                             @if(empty($employee_salaries))
-{{--
-                                <form  action="{{route('admin.submit-final-salary')}}" method="post">
---}}
                             <form method="post" action="{{route('user.submit-final-salary', ['token' => $year_month->token])}}">
                                     @csrf
-                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead>
-                                            <tr>
-                                                <th>Surname</th>
-                                                <th>Designation</th>
-                                                <th>Basic Salary</th>
-                                                <th>Absentism</th>
-                                                <th>Shortage</th>
-                                                <th>Bonus</th>
-                                                <th>sales</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($employees as $key => $employee)
-                                                <tr>
-                                                    <td>{{$employee->surname}}</td>
-                                                    <td>{{$employee->employeeWorkDetail->designation->designation}}</td>
-                                                    <td class="d-none"><input name="employee_id_{{$key}}" value="{{$employee->id}}" required/></td>
-                                                    <td><input name="basic_{{$key}}" type="number" placeholder="Basic Salary"  required/></td>
-                                                    <td><input name="absentism_{{$key}}" type="number" placeholder="Absentism"  /></td>
-                                                    <td><input name="shortage_{{$key}}" type="number" placeholder="Shortage"  /></td>
-                                                    <td><input name="bonus_{{$key}}" type="number" placeholder="Bonus"  /></td>
-                                                    <td><input name="sales_{{$key}}" type="number"  placeholder="Sales"  /></td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                    <input name="maximum_number" value="{{count($employees)}}" hidden />
-                                    <input name="year_month" value="{{$year_month->token}}" hidden />
-                                    <div class="table-action-box">
-                                        <button class="btn btn-outline-success"><i class="fa fa-check"></i> Process Salary</button>
-                                    </div>
-                                </form>
-                            @else
-                                <form method="post" action="{{route('user.update-final-salary', ['token' => $year_month->token])}}">
-                                    @csrf
-                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <div class="table-responsive">
+                                    <table id="datatable-buttons" class="table table-centered table-nowrap mb-0" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                         <tr>
                                             <th>Surname</th>
@@ -77,27 +39,66 @@
                                             <th>Absentism</th>
                                             <th>Shortage</th>
                                             <th>Bonus</th>
-                                            <th>Sales</th>
+                                            <th>sales</th>
                                         </tr>
                                         </thead>
-
                                         <tbody>
                                         @foreach($employees as $key => $employee)
                                             <tr>
                                                 <td>{{$employee->surname}}</td>
                                                 <td>{{$employee->employeeWorkDetail->designation->designation}}</td>
                                                 <td class="d-none"><input name="employee_id_{{$key}}" value="{{$employee->id}}" required/></td>
-                                                <td><input name="basic_{{$key}}" value="{{$employee_salaries[$key]->basic_salary}}" type="number" placeholder="Basic Salary"  required/></td>
-                                                <td><input name="absentism_{{$key}}" value="{{$employee_salaries[$key]->days_absent}}" type="number" placeholder="Absentism"  /></td>
-                                                <td><input name="shortage_{{$key}}" value="{{$employee_salaries[$key]->shortage}}" type="number" placeholder="Shortage"  /></td>
-                                                <td><input name="bonus_{{$key}}" value="{{$employee_salaries[$key]->bonus}}"  type="number" placeholder="Bonus" /></td>
-                                                <td><input name="sales_{{$key}}" value="{{$employee_salaries[$key]->sales}}"  type="number" placeholder="Sales" /></td>
+                                                <td><input name="basic_{{$key}}" type="number" placeholder="Basic Salary"  required/></td>
+                                                <td><input name="absentism_{{$key}}" type="number" placeholder="Absentism"  /></td>
+                                                <td><input name="shortage_{{$key}}" type="number" placeholder="Shortage"  /></td>
+                                                <td><input name="bonus_{{$key}}" type="number" placeholder="Bonus"  /></td>
+                                                <td><input name="sales_{{$key}}" type="number"  placeholder="Sales"  /></td>
                                             </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
+                                </div>
                                     <input name="maximum_number" value="{{count($employees)}}" hidden />
-                                    <div class="table-action-box">
+                                    <input name="year_month" value="{{$year_month->token}}" hidden />
+                                    <div class="table-action-box mt-4">
+                                        <button class="btn btn-outline-success"><i class="fa fa-check"></i> Process Salary</button>
+                                    </div>
+                                </form>
+                            @else
+                                <form method="post" action="{{route('user.update-final-salary', ['token' => $year_month->token])}}">
+                                    @csrf
+                                    <div class="table-responsive">
+                                        <table id="datatable-buttons" class="table table-centered table-nowrap mb-0" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <th>Surname</th>
+                                                <th>Designation</th>
+                                                <th>Basic Salary</th>
+                                                <th>Absentism</th>
+                                                <th>Shortage</th>
+                                                <th>Bonus</th>
+                                                <th>Sales</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            @foreach($employees as $key => $employee)
+                                                <tr>
+                                                    <td>{{$employee->surname}}</td>
+                                                    <td>{{$employee->employeeWorkDetail->designation->designation}}</td>
+                                                    <td class="d-none"><input name="employee_id_{{$key}}" value="{{$employee->id}}" required/></td>
+                                                    <td><input name="basic_{{$key}}" value="{{$employee_salaries[$key]->basic_salary}}" type="number" placeholder="Basic Salary"  required/></td>
+                                                    <td><input name="absentism_{{$key}}" value="{{$employee_salaries[$key]->days_absent}}" type="number" placeholder="Absentism"  /></td>
+                                                    <td><input name="shortage_{{$key}}" value="{{$employee_salaries[$key]->shortage}}" type="number" placeholder="Shortage"  /></td>
+                                                    <td><input name="bonus_{{$key}}" value="{{$employee_salaries[$key]->bonus}}"  type="number" placeholder="Bonus" /></td>
+                                                    <td><input name="sales_{{$key}}" value="{{$employee_salaries[$key]->sales}}"  type="number" placeholder="Sales" /></td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <input name="maximum_number" value="{{count($employees)}}" hidden />
+                                    <div class="table-action-box mt-4">
                                         <button id="submit-button" class="btn btn-outline-success"><i class="fa fa-check"></i> Process Salary</button>
                                     </div>
                                 </form>

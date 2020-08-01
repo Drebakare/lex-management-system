@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class YearMonth extends Model
 {
@@ -28,6 +29,7 @@ class YearMonth extends Model
             $create_session = YearMonth::create([
                 "month_id" => $request->month,
                 'year_id' =>  $request->year,
+                'token' => Str::random(15),
             ]);
             return $create_session;
         }

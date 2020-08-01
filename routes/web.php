@@ -391,6 +391,16 @@ use Illuminate\Support\Facades\Route;
         'as' => 'user.submit-preview-salary'
     ]);
 
+    Route::get('user/preview-salary-list', [
+        'uses' => 'Account\AccountController@previewSalaryList',
+        'as' => 'user.preview-salary-list'
+    ]);
+
+    Route::get('user/print-salary-list', [
+        'uses' => 'Account\AccountController@printSalaryList',
+        'as' => 'user.print-salary-list'
+    ]);
+
 /*Route::post('user/final-salary-process/{token}', function () {
    dd('uthekrhejrhejrer');
 });*/

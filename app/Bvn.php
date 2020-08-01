@@ -12,7 +12,7 @@ class Bvn extends Model
     ];
 
     public function employee(){
-        return $this -> hasMany(Employee::class);
+        return $this -> hasOne(Employee::class);
     }
 
     public static function createAccount($request, $bvn_details,$bank){

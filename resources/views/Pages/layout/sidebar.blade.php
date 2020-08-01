@@ -46,6 +46,7 @@
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{route('user.account-update-salary')}}">Update Salary BreakDown</a></li>
                             <li><a href="{{route('user.preview-salary')}}">Preview Salary</a></li>
+                            <li><a href="{{route('user.preview-salary-list')}}">Print Salary Bank List</a></li>
                            {{-- <li><a href="{{route('dashboard.upload-excel-employee')}}">Add Employees (Excel Sheet)</a></li>
                             <li><a href="{{route('user.view-employees')}}">View All Employees</a></li>--}}
                         </ul>

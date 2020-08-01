@@ -28,6 +28,12 @@ class AccountController extends Controller
         return view('Pages.Actions.Financials.preview-salary', compact('years', 'months', 'departments'));
     }
 
+    public function previewSalaryList(){
+        $years = Year::where('status', 1)->get();
+        $months = Month::where('status', 1)->get();
+        return view('Pages.Actions.Financials.preview-list', compact('years', 'months'));
+    }
+
     public function submitPreviewSalary(Request $request){
         $this->validate($request, [
             'month' => 'bail|required',
@@ -38,6 +44,22 @@ class AccountController extends Controller
         $salaries = MonthlySalary::getSalaries($year_month->id);
         if (count($salaries) < 1) return redirect()->back()->with('failure', 'Salary update does not exist yet, kindly check back for update');
         return view("Pages.Actions.Financials.view-salary", compact('salaries'));
+    }
+
+    public function printSalaryList(Request $request){
+        $this->validate($request, [
+            'month' => 'bail|required',
+            'year' => 'bail|required',
+        ]);
+        $year_month = YearMonth::where(['year_id' => $request->year, 'month_id' => $request->month])->first();
+        if (!$year_month) return redirect()->back()->with('failure', "Salary Period is not opened yet, kindly check back later");
+        $salaries = MonthlySalary::getSalaries($year_month->id);
+        if (count($salaries) < 1) return redirect()->back()->with('failure', 'Salary update does not exist yet, kindly check back for update');
+        $total = 0;
+        foreach ($salaries as $salary){
+            $total = $total + (($salary->basic_salary+$salary->bonus) - ($salary->tax_paid+$salary->pension_paid+$salary->absentism+$salary->shortage+$salary->loan+$salary->card));
+        }
+        return view("Pages.Actions.Financials.bank-list", compact('salaries', 'total'));
     }
 
     public function accountProcessSalary(Request $request){
