@@ -87,6 +87,12 @@
                         </ul>
                     </li>
                 @endif
+                <li>
+                    <a href="{{route('logout')}}" class=" waves-effect">
+                        <i class="bx bx-log-out"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
                 {{--<li class="d-none">
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bxs-cart"></i>
