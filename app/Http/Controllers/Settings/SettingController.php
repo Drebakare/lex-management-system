@@ -8,11 +8,13 @@ use App\HomeTown;
 use App\Http\Controllers\Controller;
 use App\ImageType;
 use App\Lg;
+use App\Month;
 use App\Rating;
 use App\Role;
 use App\State;
 use App\Store;
 use App\Title;
+use App\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -53,6 +55,162 @@ class SettingController extends Controller
             }
             else{
                 return redirect()->back()->with('failure', 'Store Details Could not be Updated');
+            }
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function addMonth(){
+        $months = Month::get();
+        return view('Pages.Actions.Admin.create-month', compact('months'));
+    }
+
+    public function submitMonth(Request $request){
+        $this->validate($request, [
+            'month' => 'bail|required|unique:months'
+        ]);
+        try {
+            $new_month = new Month();
+            $new_month->month = $request->month;
+            $new_month->token = Str::random(15);
+            $new_month->save();
+            return redirect()->back()->with('success', 'Month Successfully Created');
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function editMonthDetails(Request $request, $token){
+        $this->validate($request, [
+            'month' => 'bail|required|unique:months'
+        ]);
+        try {
+            $month = Month::where('token', $token)->first();
+            if ($month){
+                $month->month = $request->month;
+                $month->token = Str::random(15);
+                $month->save();
+                return redirect()->back()->with('success', 'Month Successfully Created');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Month Details Could not be Updated');
+            }
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+    public function deactivateMonth($token){
+        try {
+            $month = Month::where('token', $token)->first();
+            if ($month){
+                $month->status = 0;
+                $month->token = Str::random(15);
+                $month->save();
+                return redirect()->back()->with('success', 'Month Details Successfully Updated');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Month Does not exist');
+            }
+
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function activateMonth($token){
+        try {
+            $month = Month::where('token', $token)->first();
+            if ($month){
+                $month->status = 1;
+                $month->token = Str::random(15);
+                $month->save();
+                return redirect()->back()->with('success', 'Month Details Successfully Updated');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Month Does not exist');
+            }
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function addYear(){
+        $years = Year::get();
+        return view('Pages.Actions.Admin.create-year', compact('years'));
+    }
+
+    public function submitYear(Request $request){
+        $this->validate($request, [
+            'year' => 'bail|required|unique:years'
+        ]);
+        try {
+            $new_year = new Year();
+            $new_year->year = $request->year;
+            $new_year->token = Str::random(15);
+            $new_year->save();
+            return redirect()->back()->with('success', 'Year Successfully Created');
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function editYearDetails(Request $request, $token){
+        $this->validate($request, [
+            'year' => 'bail|required|unique:years'
+        ]);
+        try {
+            $year = Year::where('token', $token)->first();
+            if ($year){
+                $year->year = $request->year;
+                $year->token = Str::random(15);
+                $year->save();
+                return redirect()->back()->with('success', 'Year Successfully Created');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Year Details Could not be Updated');
+            }
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+    public function deactivateYear($token){
+        try {
+            $year = Year::where('token', $token)->first();
+            if ($year){
+                $year->status = 0;
+                $year->token = Str::random(15);
+                $year->save();
+                return redirect()->back()->with('success', 'Year Details Successfully Updated');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Year Does not exist');
+            }
+
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function activateYear($token){
+        try {
+            $year = Year::where('token', $token)->first();
+            if ($year){
+                $year->status = 1;
+                $year->token = Str::random(15);
+                $year->save();
+                return redirect()->back()->with('success', 'Year Details Successfully Updated');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Year Does not exist');
             }
         }
         catch (\Exception $exception){

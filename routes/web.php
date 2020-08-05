@@ -211,6 +211,56 @@ use Illuminate\Support\Facades\Route;
             'as' => 'user.edit-store-details'
         ]);
 
+        Route::get('user/month-settings', [
+            'uses' => 'Settings\SettingController@addMonth',
+            'as' => 'user.add-month'
+        ]);
+
+        Route::post('user/submit-month-form', [
+            'uses' => 'Settings\SettingController@submitMonth',
+            'as' => 'user.submit-month'
+        ]);
+
+        Route::post('user/edit-month-details/{token}', [
+            'uses' => 'Settings\SettingController@editMonthDetails',
+            'as' => 'user.edit-month-details'
+        ]);
+
+        Route::get('user/deactivate-month/{token}', [
+            'uses' => 'Settings\SettingController@deactivateMonth',
+            'as' => 'month.deactivate'
+        ]);
+
+        Route::get('user/activate-month/{token}', [
+            'uses' => 'Settings\SettingController@activateMonth',
+            'as' => 'month.activate'
+        ]);
+
+        Route::get('user/year-settings', [
+            'uses' => 'Settings\SettingController@addYear',
+            'as' => 'user.add-year'
+        ]);
+
+        Route::post('user/submit-year-form', [
+            'uses' => 'Settings\SettingController@submitYear',
+            'as' => 'user.submit-year'
+        ]);
+
+        Route::post('user/edit-year-details/{token}', [
+            'uses' => 'Settings\SettingController@editYearDetails',
+            'as' => 'user.edit-year-details'
+        ]);
+
+        Route::get('user/deactivate-year/{token}', [
+            'uses' => 'Settings\SettingController@deactivateYear',
+            'as' => 'year.deactivate'
+        ]);
+
+        Route::get('user/activate-year/{token}', [
+            'uses' => 'Settings\SettingController@activateYear',
+            'as' => 'year.activate'
+        ]);
+
         Route::get('user/title-settings', [
             'uses' => 'Settings\SettingController@addTitle',
             'as' => 'user.add-title'

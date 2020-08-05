@@ -73,6 +73,8 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{route('user.add-store')}}"> Add/Edit Store</a></li>
+                            <li><a href="{{route('user.add-month')}}"> Add/Edit Month</a></li>
+                            <li><a href="{{route('user.add-year')}}"> Add/Edit Year</a></li>
                             <li><a href="{{route('user.add-title')}}"> Add/Edit Title </a></li>
                             <li><a href="{{route('user.add-state')}}"> Add/Edit State </a></li>
                             <li><a href="{{route('user.add-lgs')}}"> Add/Edit Lgs </a></li>
