@@ -28,32 +28,34 @@
                             </p>
                             <form method="post" action="{{route('user.account-final-salary'/*, ['token' => $year_month->token]*/)}}">
                                 @csrf
-                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>Surname</th>
-                                            <th>Designation</th>
-                                            <th class="d-none">token</th>
-                                            <th>Basic Salary</th>
-                                            <th>Savings</th>
-                                            <th>Loan</th>
-                                            <th>Card</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($salaries as $key => $salary)
+                                <div class="table-responsive">
+                                    <table id="datatable-buttons" class="table table-centered table-nowrap mb-0" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <thead class="thead-light">
                                             <tr>
-                                                <td>{{$salary->employee->surname}}</td>
-                                                <td>{{$salary->employee->employeeWorkDetail->designation->designation}}</td>
-                                                <td class="d-none"><input name="token_{{$key}}" value="{{$salary->token}}" required/></td>
-                                                <td><input name="basic_{{$key}}" type="number" value="{{$salary->basic_salary}}" placeholder="Basic Salary" disabled/></td>
-                                                <td><input name="saving_{{$key}}" type="number" value="{{$salary->savings}}" placeholder="Savings"  required/></td>
-                                                <td><input name="loan_{{$key}}" type="number" value="{{$salary->loan}}" placeholder="Loan"  required/></td>
-                                                <td><input name="card_{{$key}}" type="number" value="{{$salary->card}}" placeholder="Sim Card" required /></td>
+                                                <th>Surname</th>
+                                                <th>Designation</th>
+                                                <th class="d-none">token</th>
+                                                <th>Basic Salary</th>
+                                                <th>Savings</th>
+                                                <th>Loan</th>
+                                                <th>Card</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($salaries as $key => $salary)
+                                                <tr>
+                                                    <td>{{$salary->employee->surname. " " . $salary->employee->first_name}}</td>
+                                                    <td>{{$salary->employee->employeeWorkDetail->designation->designation}}</td>
+                                                    <td class="d-none"><input name="token_{{$key}}" value="{{$salary->token}}" required/></td>
+                                                    <td><input name="basic_{{$key}}" type="number" value="{{$salary->basic_salary}}" placeholder="Basic Salary" disabled/></td>
+                                                    <td><input name="saving_{{$key}}" type="number" value="{{$salary->savings}}" placeholder="Savings"  required/></td>
+                                                    <td><input name="loan_{{$key}}" type="number" value="{{$salary->loan}}" placeholder="Loan"  required/></td>
+                                                    <td><input name="card_{{$key}}" type="number" value="{{$salary->card}}" placeholder="Sim Card" required /></td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                     </table>
+                                </div>
                                 <input name="maximum_number" value="{{count($salaries)}}" hidden />
 {{--
                                 <input name="year_month" value="{{$year_month->token}}" hidden />

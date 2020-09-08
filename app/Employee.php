@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class Employee extends Model
 {
     protected $fillable = [
         'title_id', 'token', 'marital_status_id', 'state_id', 'home_town_id', 'lg_id',
-        'bvn_id', 'first_name', 'other_name', 'surname', 'address', 'phone_number', 'dob', 'staff_id', 'api_token'
+        'bvn_id', 'first_name', 'other_name', 'surname', 'address', 'phone_number', 'dob', 'staff_id', 'api_token', 'remove_pension'
     ];
 
     public function title(){
@@ -121,7 +122,7 @@ class Employee extends Model
         }
         else{
             $employee = Employee::whereHas('employeeWorkDetail', function($query) use($department){
-                $query->where('is_active', 1)->where('department_id', $department);
+                $query->where('is_active', 1)->where('department_id', $department)/*->where('store_id',Auth::user()->store_id)*/;
             })->whereHas('registrationStatus', function ($pass){
                 $pass->where('percentage', 100);
             })->get();

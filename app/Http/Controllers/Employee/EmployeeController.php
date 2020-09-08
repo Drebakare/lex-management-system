@@ -99,6 +99,7 @@ class EmployeeController extends Controller
     public function viewEmployeeDetails($token){
         $employee = Employee::fetchEmployee($token);
         if ($employee){
+            if(!$employee-> registrationStatus) return redirect()->back()->with('failure', 'Registration Process has not started yet');
             if ($employee->registrationStatus->percentage == 100){
                 return view('Pages.Actions.Hr.employee-information', compact('employee'));
             }
@@ -446,7 +447,6 @@ class EmployeeController extends Controller
                     $employee->api_token = Str::random(20);
                     $employee->save();
                 }
-
                 if (!$employee->staff_id){
                     $start_yr = substr($employee->employeeWorkDetail->start_date,0,4);
                     $employee_department_id = $employee->employeeWorkDetail->department_id;

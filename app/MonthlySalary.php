@@ -87,8 +87,9 @@ class MonthlySalary extends Model
     }
 
     public static function calculateTax($basic_salary){
-        if ($basic_salary <= 25000) return ((1/100) * $basic_salary);
-
+        if ($basic_salary <= 25000){
+            return((1/100) * $basic_salary);
+        }
         $yearly_income = 12 * $basic_salary;
         $consolidated_relief = ((20/100) * $yearly_income) + 200000;
         $chargeable_income = $yearly_income - $consolidated_relief;
@@ -113,8 +114,9 @@ class MonthlySalary extends Model
     }
 
     public static function calcAbsentism($basic_salary, $absentism){
-        $days = Carbon::now()->daysInMonth;
-        $salary_per_day = $basic_salary/$days;
+        $days = Carbon::now();
+        $last_month = $days->subMonth()->daysInMonth;
+        $salary_per_day = $basic_salary/$last_month;
         return $salary_per_day * $absentism;
     }
 }

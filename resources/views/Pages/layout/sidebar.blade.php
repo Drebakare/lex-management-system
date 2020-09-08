@@ -20,9 +20,18 @@
                             <span>Employee</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{route('user.add-employee')}}">Add Employee (Single)</a></li>
-                            <li><a href="{{route('dashboard.upload-excel-employee')}}">Add Employees (Excel Sheet)</a></li>
                             <li><a href="{{route('user.view-employees')}}">View All Employees</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-wrench"></i>
+                            <span>System Settings</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('user.add-state')}}"> Add/Edit State </a></li>
+                            <li><a href="{{route('user.add-lgs')}}"> Add/Edit Lgs </a></li>
+                            <li><a href="{{route('user.add-home-town')}}"> Add/Edit Home Town </a></li>
                         </ul>
                     </li>
                 @endif
@@ -46,6 +55,7 @@
                             <span>Financials</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('user.account-view-employee')}}">View Employees</a></li>
                             <li><a href="{{route('user.account-update-salary')}}">Update Salary BreakDown</a></li>
                             <li><a href="{{route('user.preview-salary')}}">Preview Salary</a></li>
                             <li><a href="{{route('user.preview-salary-list')}}">Print Salary Bank List</a></li>
@@ -72,6 +82,8 @@
                             <span>System Settings</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('user.add-employee')}}">Add Employee (Single)</a></li>
+                            <li><a href="{{route('dashboard.upload-excel-employee')}}">Add Employees (Excel Sheet)</a></li>
                             <li><a href="{{route('user.add-store')}}"> Add/Edit Store</a></li>
                             <li><a href="{{route('user.add-month')}}"> Add/Edit Month</a></li>
                             <li><a href="{{route('user.add-year')}}"> Add/Edit Year</a></li>
@@ -83,6 +95,7 @@
                             <li><a href="{{route('user.add-rating')}}"> Add/Edit Rating </a></li>
                             <li><a href="{{route('user.add-bank')}}"> Add/Edit Bank </a></li>
                             <li><a href="{{route('user.add-designation')}}"> Add/Edit Designation </a></li>
+                            <li><a href="{{route('user.add-department')}}"> Add/Edit Department </a></li>
                             <li><a href="{{route('user.add-image')}}"> Add/Edit Image Type </a></li>
                             {{--<li><a href="{{route('admin.add-product-type')}}">Add Product Type </a></li>
                             <li><a href="{{route('admin.add-new-product')}}">Add Product </a></li>--}}

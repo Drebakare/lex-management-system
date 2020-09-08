@@ -7,10 +7,12 @@ use App\Employee;
 use App\Http\Controllers\Controller;
 use App\Month;
 use App\MonthlySalary;
+use App\User;
 use App\Year;
 use App\YearMonth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AccountController extends Controller
 {
@@ -57,7 +59,7 @@ class AccountController extends Controller
         if (count($salaries) < 1) return redirect()->back()->with('failure', 'Salary update does not exist yet, kindly check back for update');
         $total = 0;
         foreach ($salaries as $salary){
-            $total = $total + (($salary->basic_salary+$salary->bonus) - ($salary->tax_paid+$salary->pension_paid+$salary->absentism+$salary->shortage+$salary->loan+$salary->card));
+            $total = $total + (($salary->basic_salary+$salary->bonus) - ($salary->tax_paid+$salary->pension_paid+$salary->absentism+$salary->shortage+$salary->loan+$salary->cards+$salary->savings));
         }
         return view("Pages.Actions.Financials.bank-list", compact('salaries', 'total'));
     }
@@ -111,6 +113,47 @@ class AccountController extends Controller
         }
         catch (\Exception $exception){
             return redirect(route('user.account-update-salary'))->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function viewEmployeeDetails(){
+        $employees = Employee::get();
+        return view('Pages.Actions.Financials.view-employees', compact('employees'));
+    }
+
+    public function disablePensionRemoval($token){
+        try {
+            $employee = Employee::where('token', $token)->first();
+            if ($employee){
+                $employee->remove_pension = 0;
+                $employee->token = Str::random(15);
+                $employee->save();
+                return  redirect()->back()->with('success', 'Action Successfully Performed');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Employee Does not Exist');
+            }
+        }
+        catch(\Exception $exception){
+            return redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function enablePensionRemoval($token){
+        try {
+            $employee = Employee::where('token', $token)->first();
+            if ($employee){
+                $employee->remove_pension = 1;
+                $employee->token = Str::random(15);
+                $employee->save();
+                return  redirect()->back()->with('success', 'Action Successfully Performed');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Employee Does not Exist');
+            }
+        }
+        catch(\Exception $exception){
+            return redirect()->back()->with('failure', 'Action Could not be Performed');
         }
     }
 }

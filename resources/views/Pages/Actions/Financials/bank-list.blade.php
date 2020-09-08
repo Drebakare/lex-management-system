@@ -83,7 +83,7 @@
                                             <td>{{$salary->employee->surname . ' ' . $salary->employee->first_name}}</td>
                                             <td>{{$salary->employee->bvn->account_number}}</td>
                                             <td>{{$salary->employee->bvn->bank}}</td>
-                                            <td class="text-right">{{number_format(($salary->basic_salary+$salary->bonus) - ($salary->tax_paid+$salary->pension_paid+$salary->absentism+$salary->shortage+$salary->loan+$salary->card))}}</td>
+                                            <td class="text-right">{{number_format(($salary->basic_salary+$salary->bonus) - ($salary->tax_paid+$salary->pension_paid+$salary->absentism+$salary->shortage+$salary->loan+$salary->card+$salary->savings))}}</td>
                                         </tr>
                                     @endforeach
                                     <tr>

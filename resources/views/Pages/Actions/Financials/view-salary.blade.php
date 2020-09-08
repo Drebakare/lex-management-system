@@ -38,7 +38,7 @@
                                         <th>Bonus</th>
                                         <th>Tax</th>
                                         <th>Pension</th>
-                                        <th>ABS/SHT/LN/CD</th>
+                                        <th>ABS/SHT/LN/CD/SAV</th>
                                         <th>Net Payment</th>
                                     </tr>
                                 </thead>
@@ -54,10 +54,10 @@
                                             <td>{{number_format($salary->tax_paid)}}</td>
                                             <td>{{number_format($salary->pension_paid)}}</td>
                                             <td>
-                                                abs={{number_format($salary->absentism)}}, sht={{number_format($salary->shortage)}}, ln={{number_format($salary->loan)}}, cd={{number_format($salary->card)}}
+                                                abs={{number_format($salary->absentism)}}, sht={{number_format($salary->shortage)}}, ln={{number_format($salary->loan)}}, cd={{number_format($salary->cards)}}, sav={{number_format($salary->savings)}}
                                             </td>
                                             <td>
-                                                {{number_format(($salary->basic_salary+$salary->bonus) - ($salary->tax_paid+$salary->pension_paid+$salary->absentism+$salary->shortage+$salary->loan+$salary->card))}}
+                                                {{number_format(($salary->basic_salary+$salary->bonus) - ($salary->tax_paid+$salary->pension_paid+$salary->absentism+$salary->shortage+$salary->loan+$salary->cards+$salary->savings))}}
                                             </td>
                                         </tr>
                                     @endforeach

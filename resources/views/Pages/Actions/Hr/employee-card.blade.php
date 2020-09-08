@@ -40,7 +40,7 @@
                                         <div>
                                             <div class="col-12" style="margin-left: -70px">
                                                 <h4 class="font-size-24" style="color: navy; font-weight: bolder" >{{strtoupper($employee->surname) ." ". $employee->first_name ." ". $employee->other_name}}</h4>
-                                                <h4 class="font-size-20 mb-0" style="color: red; font-weight: bold">{{$employee->employeeWorkDetail->designation->designation}}</h4>
+                                                <h4 class="font-size-20 mb-0" style="color: cornflowerblue; font-weight: bold">{{$employee->employeeWorkDetail->designation->designation}}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-1">
-                                   <h5 style="writing-mode: vertical-rl; text-orientation: sideways; margin-left: -1px; margin-top: -52px; font-size: 17px; font-weight: bold; color:red">
+                                   <h5 style="writing-mode: vertical-rl; text-orientation: sideways; margin-left: -1px; margin-top: -52px; font-size: 17px; font-weight: bold; color:cornflowerblue">
                                        {{$employee->employeeWorkDetail->department->department}}
                                    </h5>
                                 </div>
@@ -58,9 +58,9 @@
                                             <div class="col-3 row" style="margin-left: -50px;">
                                                 <div class="col-md-8">
                                                     <h6 style="color: navy; font-size: 12px"> Staff ID:</h6>
-                                                    <h6 style="color: #a2a2a2; font-size: 10px !important; margin-top: -5px">{{$employee->staff_id}}</h6>
+                                                    <h6 style="color: black; font-size: 10px !important; margin-top: -5px">{{$employee->staff_id}}</h6>
                                                     <h6 style="color: navy; font-size: 12px"> Date of Issue:</h6>
-                                                    <h6 style="color: #a2a2a2; font-size: 10px !important; margin-top: -5px; margin-bottom: -10px">{{date("Y/m/d")}}</h6>
+                                                    <h6 style="color: black; font-size: 10px !important; margin-top: -5px; margin-bottom: -10px">{{date("Y/m/d")}}</h6>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="vl"></div>
@@ -69,9 +69,9 @@
                                             <div class="col-3 row">
                                                 <div class="col-md-8">
                                                     <h6 style="color: navy; font-size: 12px"> Gender:</h6>
-                                                    <h6 style="color: #a2a2a2; font-size: 10px !important; margin-top: -5px">{{$employee->title_id == 2? "Male" : "Female"}}</h6>
+                                                    <h6 style="color: black; font-size: 10px !important; margin-top: -5px">{{$employee->title_id == 2? "Male" : "Female"}}</h6>
                                                     <h6 style="color: navy; font-size: 12px"> Valid For:</h6>
-                                                    <h6 style="color: #a2a2a2; font-size: 10px !important; margin-top: -5px; margin-bottom: -10px"> 2020 - 2021</h6>
+                                                    <h6 style="color: black; font-size: 10px !important; margin-top: -5px; margin-bottom: -10px"> 2020 - 2021</h6>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="vl"></div>
@@ -79,8 +79,8 @@
                                             </div>
                                             <div class="col-4 row">
                                                 <div class="col-md-10" style="margin-top: 8px;">
-                                                    <h6 style="color: #a2a2a2; font-size: 12px !important;"> +2348037173026</h6>
-                                                    <h6 style="color: #a2a2a2; font-size: 12px"> Tech@lexican.com.ng</h6>
+                                                    <h6 style="color: black; font-size: 12px !important;"> +2348037173026</h6>
+                                                    <h6 style="color: black; font-size: 12px"> Tech@lexican.com.ng</h6>
                                                     <h6 style="color: navy; font-size: 12px"> www.lexican.com.ng</h6>
                                                 </div>
                                                 <div class="col-md-2">

@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class OtherMethod extends Model
 {
     public static function getAccountDetails($request, $bank_code){
-
-
         $curl = curl_init();
         $url = "https://api.paystack.co/bank/resolve?account_number=".$request->account_number."&bank_code=".$bank_code;
         curl_setopt_array($curl, array(
@@ -49,7 +47,6 @@ class OtherMethod extends Model
                 "Authorization: Bearer sk_live_09b1d42373768d7321727519e00261b1a06d0906",
             ),
         ));
-
         $response = curl_exec($curl);
         curl_close($curl);
         $result = json_decode($response);

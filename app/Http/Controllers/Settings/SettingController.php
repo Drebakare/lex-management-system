@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Bank;
+use App\Department;
 use App\Designation;
 use App\HomeTown;
 use App\Http\Controllers\Controller;
@@ -421,6 +422,48 @@ class SettingController extends Controller
             }
             else{
                 return redirect()->back()->with('failure', 'Designation Details Could not be Updated');
+            }
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function addDepartment(){
+        $departments = Department::get();
+        return view('Pages.Actions.Admin.create-department', compact('departments'));
+    }
+
+    public function submitDepartment(Request $request){
+        $this->validate($request, [
+            'department' => 'bail|required|unique:departments'
+        ]);
+        try {
+            $new_department = new Department();
+            $new_department->department = $request->department;
+            $new_department->token = Str::random(15);
+            $new_department->save();
+            return redirect()->back()->with('success', 'Department Successfully Created');
+        }
+        catch (\Exception $exception){
+            return  redirect()->back()->with('failure', 'Action Could not be Performed');
+        }
+    }
+
+    public function editDepartmentDetails(Request $request, $token){
+        $this->validate($request, [
+            'department' => 'bail|required|unique:departments'
+        ]);
+        try {
+            $department = Department::where('token', $token)->first();
+            if ($department){
+                $department->department = $request->department;
+                $department->token = Str::random(15);
+                $department->save();
+                return redirect()->back()->with('success', 'Department Successfully Created');
+            }
+            else{
+                return redirect()->back()->with('failure', 'Department Details Could not be Updated');
             }
         }
         catch (\Exception $exception){

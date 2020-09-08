@@ -200,12 +200,10 @@ use Illuminate\Support\Facades\Route;
             'uses' => 'Settings\SettingController@addStore',
             'as' => 'user.add-store'
         ]);
-
         Route::post('user/submit-store-form', [
             'uses' => 'Settings\SettingController@submitStore',
             'as' => 'user.submit-store'
         ]);
-
         Route::post('user/edit-store-details/{token}', [
             'uses' => 'Settings\SettingController@editStoreDetails',
             'as' => 'user.edit-store-details'
@@ -381,6 +379,21 @@ use Illuminate\Support\Facades\Route;
             'as' => 'user.edit-designation-details'
         ]);
 
+        Route::get('user/department-settings', [
+            'uses' => 'Settings\SettingController@addDepartment',
+            'as' => 'user.add-department'
+        ]);
+
+        Route::post('user/submit-department-form', [
+            'uses' => 'Settings\SettingController@submitDepartment',
+            'as' => 'user.submit-department'
+        ]);
+
+        Route::post('user/edit-department-details/{token}', [
+            'uses' => 'Settings\SettingController@editDepartmentDetails',
+            'as' => 'user.edit-department-details'
+        ]);
+
         Route::get('user/image-settings', [
             'uses' => 'Settings\SettingController@addImage',
             'as' => 'user.add-image'
@@ -395,6 +408,7 @@ use Illuminate\Support\Facades\Route;
             'uses' => 'Settings\SettingController@editImageDetails',
             'as' => 'user.edit-image-details'
         ]);
+
 
     });
 
@@ -424,6 +438,21 @@ use Illuminate\Support\Facades\Route;
         Route::get('user/account-update-salary', [
             'uses' => 'Account\AccountController@viewAccountForm',
             'as' => 'user.account-update-salary'
+        ]);
+
+        Route::get('user/account-view-employee', [
+            'uses' => 'Account\AccountController@viewEmployeeDetails',
+            'as' => 'user.account-view-employee'
+        ]);
+
+        Route::get('user/account-disable-pension-removal/{token}', [
+            'uses' => 'Account\AccountController@disablePensionRemoval',
+            'as' => 'user.account-disable-pension-removal'
+        ]);
+
+        Route::get('user/account-enable-pension-removal/{token}', [
+            'uses' => 'Account\AccountController@enablePensionRemoval',
+            'as' => 'user.account-enable-pension-removal'
         ]);
 
         Route::get('user/account-process-salary', [

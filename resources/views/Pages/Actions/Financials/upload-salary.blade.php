@@ -2,8 +2,6 @@
 @section('contents')
     <div class="page-content">
         <div class="container-fluid">
-
-            <!-- start page title -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-flex align-items-center justify-content-between">
@@ -87,11 +85,11 @@
                                                     <td>{{$employee->surname}}</td>
                                                     <td>{{$employee->employeeWorkDetail->designation->designation}}</td>
                                                     <td class="d-none"><input name="employee_id_{{$key}}" value="{{$employee->id}}" required/></td>
-                                                    <td><input name="basic_{{$key}}" value="{{$employee_salaries[$key]->basic_salary}}" type="number" placeholder="Basic Salary"  required/></td>
-                                                    <td><input name="absentism_{{$key}}" value="{{$employee_salaries[$key]->days_absent}}" type="number" placeholder="Absentism"  /></td>
-                                                    <td><input name="shortage_{{$key}}" value="{{$employee_salaries[$key]->shortage}}" type="number" placeholder="Shortage"  /></td>
-                                                    <td><input name="bonus_{{$key}}" value="{{$employee_salaries[$key]->bonus}}"  type="number" placeholder="Bonus" /></td>
-                                                    <td><input name="sales_{{$key}}" value="{{$employee_salaries[$key]->sales}}"  type="number" placeholder="Sales" /></td>
+                                                    <td><input name="basic_{{$key}}" value="{{/*$employee_salaries[$key]->basic_salary*/ !isset($employee_salaries[$key]) ? 0 : $employee_salaries[$key]->basic_salary}}" type="number" placeholder="Basic Salary"  required/></td>
+                                                    <td><input name="absentism_{{$key}}" value="{{ !isset($employee_salaries[$key]) ? 0 : $employee_salaries[$key]->days_absent}}" type="number" placeholder="Absentism"  /></td>
+                                                    <td><input name="shortage_{{$key}}" value="{{!isset($employee_salaries[$key]) ? 0 : $employee_salaries[$key]->shortage}}" type="number" placeholder="Shortage"  /></td>
+                                                    <td><input name="bonus_{{$key}}" value="{{!isset($employee_salaries[$key]) ? 0 : $employee_salaries[$key]->bonus}}"  type="number" placeholder="Bonus" /></td>
+                                                    <td><input name="sales_{{$key}}" value="{{!isset($employee_salaries[$key]) ? 0 : $employee_salaries[$key]->sales}}"  type="number" placeholder="Sales" /></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
